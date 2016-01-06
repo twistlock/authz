@@ -22,9 +22,11 @@ The authorization broker is delivered with a reference implementation of basic a
 // Remark: In basic flow, each user must have a unique policy.
 // If a user is used by more than one policy, the results may be inconsistent
 type BasicPolicy struct {
-	Actions  []string `json:"actions"`  // Actions are the docker actions (mapped to authz terminology) that are allowed according to this policy
-	Users    []string `json:"users"`    // Users are the users for which this policy apply to
-	Name     string   `json:"name"`     // Name is the policy name
+	Actions []string `json:"actions"`  // Actions are the docker actions (mapped to authz terminology) that are allowed according to this policy
+	                                   // Action are are specified as regular expressions
+	Users   []string `json:"users"`    // Users are the users for which this policy apply to
+	Name    string   `json:"name"`     // Name is the policy name
+	Readonly bool    `json:"readonly"` // Readonly indicates this policy only allow get commands
 }
 ```
 
@@ -39,6 +41,8 @@ Below are some examples for basic policy scenarios:
  2. All users can all docker commands:                    `{"name":"policy_2","users":["*"],"actions":["*"]}`
  3. Alice and bob can create new containers:              `{"name":"policy_3","users":["alice","bob"],"actions":["container_create"]}`
  4. Service account can read logs and run container top:  `{"name":"policy_4","users":["service_account"],"actions":["container_logs","container_top"]}` 
+ 5. Alice can perform anything on containers: `{"name":"policy_5","users":["alice"],"actions":["container"]}` 
+ 6. Alice can only perform get operations on containers:  `{"name":"policy_5","users":["alice"],"actions":["container"], "readonly":true }` 
 
 ## Installing the plugin
 

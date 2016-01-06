@@ -10,6 +10,7 @@ import (
 	"io/ioutil"
 	"path"
 	"strings"
+	"regexp"
 )
 
 // BasicPolicy represent a single policy object that is evaluated in the authorization flow.
@@ -24,9 +25,11 @@ import (
 // Remark: In basic flow, each user must have a unique policy.
 // If a user is used by more than one policy, the results may be inconsistent
 type BasicPolicy struct {
-	Actions []string `json:"actions"` // Actions are the docker actions (mapped to authz terminology) that are allowed according to this policy
-	Users   []string `json:"users"`   // Users are the users for which this policy apply to
-	Name    string   `json:"name"`    // Name is the policy name
+	Actions []string `json:"actions"`  // Actions are the docker actions (mapped to authz terminology) that are allowed according to this policy
+	                                   // Action are are specified as regular expressions
+	Users   []string `json:"users"`    // Users are the users for which this policy apply to
+	Name    string   `json:"name"`     // Name is the policy name
+	Readonly bool    `json:"readonly"` // Readonly indicates this policy only allow get commands
 }
 
 type BasicAuthorizer struct {
@@ -132,8 +135,21 @@ func (f *BasicAuthorizer) AuthZReq(authZReq *authorization.Request) *authorizati
 	for _, policy := range f.policies {
 		for _, user := range policy.Users {
 			if user == authZReq.User {
-				for _, policyAction := range policy.Actions {
-					if policyAction == action {
+				for _, policyActionPattern := range policy.Actions {
+					match, err := regexp.MatchString(policyActionPattern,action)
+					if err != nil {
+						logrus.Errorf("Failed to evaulate action %q against policy %q error %q" , action, policyActionPattern, err.Error())
+					}
+
+					if match {
+
+						if policy.Readonly && authZReq.RequestMethod != "GET" {
+							return &authorization.Response{
+								Allow: false,
+								Msg:   fmt.Sprintf("action '%s' not allowed for user '%s' by readonly policy '%s'", action, authZReq.User, policy.Name),
+							}
+						}
+
 						return &authorization.Response{
 							Allow: true,
 							Msg:   fmt.Sprintf("action '%s' allowed for user '%s' by policy '%s'", action, authZReq.User, policy.Name),

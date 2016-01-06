@@ -13,8 +13,10 @@ import (
 	"os"
 )
 
-const (pluginName = "twistlock"
-pluginFolder = "/run/docker/plugins")
+const (
+	pluginName   = "twistlock"
+	pluginFolder = "/run/docker/plugins"
+)
 
 // authZSrv wraps the plugin request/response
 type authZSrv struct {

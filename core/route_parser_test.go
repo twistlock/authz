@@ -48,8 +48,8 @@ func TestRouteParser(t *testing.T) {
 		{"DELETE", "/v.1.21/images/id", ActionImageDelete},
 		{"GET", "/v.1.21/_ping", ActionDockerPing},
 		{"GET", "/v.1.21/info", ActionDockerInfo},
-
 		{"GET", "/v.1.21/images/search", ActionImagesSearch},
+		{"GET", "/v.1.21/images/non_existing", ActionNone},
 	}
 
 	for _, test := range tests {

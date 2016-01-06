@@ -18,20 +18,25 @@ const (
 	pluginFolder = "/run/docker/plugins"
 )
 
-// authZSrv wraps the plugin request/response
+// authZSrv implements the authz plugin specification on top of unix sockets
+// the authZSrv uses two core components to manage the flow, the authorizer,
+// which is used to perform the actual authorization and the auditor, which
+// is used to audit the authorization flow
 type authZSrv struct {
-	plugin   Authorizer   // plugin is the concrete handler for plugins
-	auditor  Auditor      // auditor is used to audit input/output
-	listener net.Listener // listener is the plugin socket listener
+	authorizer Authorizer   // authorizer is the concrete handler for plugins
+	auditor    Auditor      // auditor is used to audit input/output
+	listener   net.Listener // listener is the plugin socket listener
 }
 
+// NewAuthZSrv creates a new authorization server
 func NewAuthZSrv(plugin Authorizer, auditor Auditor) *authZSrv {
-	return &authZSrv{plugin: plugin, auditor: auditor}
+	return &authZSrv{authorizer: plugin, auditor: auditor}
 }
 
+// Starts start the authorization server
 func (a *authZSrv) Start() error {
 
-	err := a.plugin.Init()
+	err := a.authorizer.Init()
 
 	if err != nil {
 		return err
@@ -83,7 +88,7 @@ func (a *authZSrv) Start() error {
 			return
 		}
 
-		authZRes := a.plugin.AuthZReq(&authReq)
+		authZRes := a.authorizer.AuthZReq(&authReq)
 
 		if authZRes != nil {
 			logrus.Debugf(authZRes.Msg)
@@ -111,7 +116,7 @@ func (a *authZSrv) Start() error {
 			return
 		}
 
-		authZRes := a.plugin.AuthZRes(&authReq)
+		authZRes := a.authorizer.AuthZRes(&authReq)
 		a.auditor.AuditResponse(&authReq, authZRes)
 		writeResponse(w, authZRes)
 	})
@@ -119,6 +124,7 @@ func (a *authZSrv) Start() error {
 	return http.Serve(a.listener, router)
 }
 
+// Stop stop the authorization server
 func (a *authZSrv) Stop() {
 
 	if a.listener == nil {

@@ -65,12 +65,12 @@ The authorization plugin can run as a container application or as a host service
 ```
 ### Running as a stand-alone service
 
-  1. Download Twistlock authz binary (todo:link)
-  2. Install Twistlock as service 
+ *  Download Twistlock authz binary (todo:link)
+ *  Install Twistlock as service 
 ```bash
    $ wget xxx | sudo sh
 ```
- 3. Update docker daemon to run with authorization enabled.
+ * Update docker daemon to run with authorization enabled.
      For example, if docker is installed as a systemd service:
 ```bash
   $ sudo systemctl edit --full docker.service 
@@ -84,14 +84,14 @@ The authorization plugin can run as a container application or as a host service
   
 ## Setting up local dev environment
 
-  1. Install [go 1.5](https://golang.org/dl/) and [docker](https://docs.docker.com/linux/step_one/).
-  2. Install [godep](https://github.com/tools/godep).
-  3. Clone the project.
-  4. Restore go dependencies:
+  * Install [go 1.5](https://golang.org/dl/) and [docker](https://docs.docker.com/linux/step_one/).
+  * Install [godep](https://github.com/tools/godep).
+  * Clone the project.
+  * Restore go dependencies:
 ```go
   $ godep restore
 ```
-  5. Build the binary and image:
+  * Build the binary and image:
 ```go
   $ make all
 ```

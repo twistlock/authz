@@ -142,6 +142,7 @@ var routes = []route{
 	route{pattern: "/exec/.*/start", method: "POST", action: ActionContainerExecStart},
 }
 
+// ParseRoute convert a method/url pattern to corresponding docker action
 func ParseRoute(method, url string) string {
 
 	for _, route := range routes {

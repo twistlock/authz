@@ -9,8 +9,8 @@ import (
 	"github.com/howeyc/fsnotify"
 	"io/ioutil"
 	"path"
-	"strings"
 	"regexp"
+	"strings"
 )
 
 // BasicPolicy represent a single policy object that is evaluated in the authorization flow.
@@ -25,11 +25,11 @@ import (
 // Remark: In basic flow, each user must have a unique policy.
 // If a user is used by more than one policy, the results may be inconsistent
 type BasicPolicy struct {
-	Actions []string `json:"actions"`  // Actions are the docker actions (mapped to authz terminology) that are allowed according to this policy
-	                                   // Action are are specified as regular expressions
-	Users   []string `json:"users"`    // Users are the users for which this policy apply to
-	Name    string   `json:"name"`     // Name is the policy name
-	Readonly bool    `json:"readonly"` // Readonly indicates this policy only allow get commands
+	Actions []string `json:"actions"` // Actions are the docker actions (mapped to authz terminology) that are allowed according to this policy
+	// Action are are specified as regular expressions
+	Users    []string `json:"users"`    // Users are the users for which this policy apply to
+	Name     string   `json:"name"`     // Name is the policy name
+	Readonly bool     `json:"readonly"` // Readonly indicates this policy only allow get commands
 }
 
 type BasicAuthorizer struct {
@@ -136,9 +136,9 @@ func (f *BasicAuthorizer) AuthZReq(authZReq *authorization.Request) *authorizati
 		for _, user := range policy.Users {
 			if user == authZReq.User {
 				for _, policyActionPattern := range policy.Actions {
-					match, err := regexp.MatchString(policyActionPattern,action)
+					match, err := regexp.MatchString(policyActionPattern, action)
 					if err != nil {
-						logrus.Errorf("Failed to evaulate action %q against policy %q error %q" , action, policyActionPattern, err.Error())
+						logrus.Errorf("Failed to evaulate action %q against policy %q error %q", action, policyActionPattern, err.Error())
 					}
 
 					if match {

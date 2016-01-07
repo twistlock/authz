@@ -1,13 +1,13 @@
 # Twistlock AuthZ Broker
  
 Basic extendable docker [authorization plugin] (https://github.com/docker/docker/blob/master/docs/extend/authorization.md) that runs on bare-metal or inside a container. The framework depends on [docker authentication plugin support] (https://github.com/docker/docker/pull/18514).
-Provided by [Twistlock] (https://www.twistlock.com)
+Provided by [Twistlock] (https://www.twistlock.com).
 
 ![Twistlock Logo](https://www.twistlock.com/wp-content/uploads/2015/12/Twistlock-Logo.png).
 
 ## Basic policy enforcement 
 
-The authorization broker is delivered with a reference implementation of basic authorization mechanism, which consist of simple user policies evaluation. The  authorization behavior of the plugin in the basic authorization flow is determined frm the policy object:
+The authorization broker is delivered with a reference implementation of basic authorization mechanism, which consist of simple user policies evaluation. The  authorization behavior of the plugin in the basic authorization flow is determined from the policy object:
 
 ```go
 // BasicPolicy represent a single policy object that is evaluated in the authorization flow.
@@ -33,6 +33,8 @@ type BasicPolicy struct {
 For basic authorization flow, all policies reside in a single policy file under `var/lib/twistlock/policy.json`. The file  which is continuously monitored and no restart is required upon changes.
 The file format is [one policy JSON object per line](http://jsonlines.org/).  There should be no enclosing list or map, just one map per line.
 The policy file should be placed under `/var/lib/twistlock/policy.json`.
+
+The conversation between [docker remote API] (https://docs.docker.com/engine/reference/api/docker_remote_api_v1.21/) (the URI and method that are passed Docker daemon to AuthZ plugin) to internal action parameters is defined by the [route parser] (https://github.com/twistlock/authz/blob/master/core/route_parser.go).
 
 ### Examples
 

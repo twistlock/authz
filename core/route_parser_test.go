@@ -49,6 +49,15 @@ func TestRouteParser(t *testing.T) {
 		{"GET", "/v.1.21/_ping", ActionDockerPing},
 		{"GET", "/v.1.21/info", ActionDockerInfo},
 		{"GET", "/v.1.21/images/search", ActionImagesSearch},
+		{"GET", "/v.1.21/networks", ActionNetworkList},
+		{"GET", "/v.1.21/networks/id", ActionNetworkInspect},
+		{"POST", "/v.1.21/networks/id/disconnect", ActionNetworkDisconnect},
+		{"POST", "/v.1.21/networks/id/connect", ActionNetworkConnect},
+		{"DELETE", "/v.1.21/networks/id", ActionNetworkRemove},
+		{"DELETE", "/v.1.21/volumes/id", ActionVolumeRemove},
+		{"POST", "/v.1.21/volumes/create", ActionVolumeCreate},
+		{"GET", "/v.1.21/volumes/id", ActionVolumeInspect},
+		{"GET", "/v.1.21/volumes", ActionVolumeList},
 		{"GET", "/v.1.21/images/non_existing", ActionNone},
 	}
 

@@ -32,22 +32,23 @@ type BasicPolicy struct {
 	Readonly bool     `json:"readonly"` // Readonly indicates this policy only allow get commands
 }
 
-type BasicAuthorizer struct {
+type basicAuthorizer struct {
 	settings *BasicAuthorizerSettings
 	policies []BasicPolicy
 }
 
+// BasicAuthorizerSettings provides settings for the basic authoerizer flow
 type BasicAuthorizerSettings struct {
-	PolicyPath string
+	PolicyPath string // PolicyPath is the path to the policy settings
 }
 
 // NewBasicAuthZHandler creates a new basic authz handler
 func NewBasicAuthZHandler(settings *BasicAuthorizerSettings) core.Authorizer {
-	return &BasicAuthorizer{settings: settings}
+	return &basicAuthorizer{settings: settings}
 }
 
 // Init loads the basic authz plugin configuration from disk
-func (f *BasicAuthorizer) Init() error {
+func (f *basicAuthorizer) Init() error {
 
 	err := f.loadPolicies()
 	if err != nil {
@@ -84,7 +85,7 @@ func (f *BasicAuthorizer) Init() error {
 	return nil
 }
 
-func (f *BasicAuthorizer) loadPolicies() error {
+func (f *basicAuthorizer) loadPolicies() error {
 	data, err := ioutil.ReadFile(path.Join(f.settings.PolicyPath))
 
 	if err != nil {
@@ -126,7 +127,7 @@ func (f *BasicAuthorizer) loadPolicies() error {
 	return nil
 }
 
-func (f *BasicAuthorizer) AuthZReq(authZReq *authorization.Request) *authorization.Response {
+func (f *basicAuthorizer) AuthZReq(authZReq *authorization.Request) *authorization.Response {
 
 	logrus.Debugf("Received AuthZ request, method: '%s', url: '%s'", authZReq.RequestMethod, authZReq.RequestURI)
 
@@ -171,7 +172,7 @@ func (f *BasicAuthorizer) AuthZReq(authZReq *authorization.Request) *authorizati
 }
 
 // AuthZRes always allow responses from server
-func (f *BasicAuthorizer) AuthZRes(authZReq *authorization.Request) *authorization.Response {
+func (f *basicAuthorizer) AuthZRes(authZReq *authorization.Request) *authorization.Response {
 	return &authorization.Response{Allow: true}
 }
 
@@ -179,6 +180,7 @@ func (f *BasicAuthorizer) AuthZRes(authZReq *authorization.Request) *authorizati
 type basicAuditor struct {
 }
 
+// NewBasicAuditor returns a new authz auditor
 func NewBasicAuditor() core.Auditor {
 	return &basicAuditor{}
 }

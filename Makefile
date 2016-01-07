@@ -1,15 +1,32 @@
-.PHONY: all binary image clean
+.PHONY: all binary test image vet lint clean
+
+SRCS = $(shell git ls-files '*.go' | grep -v '^Godeps/')
+PKGS = ./core/. ./broker/. ./authz/.
 
 default: binary
 
 all: image
 	docker build .
 
-image: binary
-	docker build .
+fmt:
+	gofmt -w $(SRCS)
 
-binary:
+vet:
+	@-go get -v golang.org/x/tools/cmd/vet
+	$(foreach pkg,$(PKGS),go vet $(pkg);)
+
+lint:
+	@ go get -v github.com/golang/lint/golint
+	$(foreach file,$(SRCS),golint $(file) || exit;)
+
+image: test
+	docker build -t twistlock/authz .
+
+binary: lint fmt vet
 	CGO_ENABLED=0 go build  -o twistlock_authz_plugin -a -installsuffix cgo ./broker/main.go
+
+test:  binary
+	go test -v ./...
 
 clean:
 	rm twistlock_authz_plugin

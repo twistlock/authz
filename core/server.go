@@ -18,23 +18,23 @@ const (
 	pluginFolder = "/run/docker/plugins"
 )
 
-// authZSrv implements the authz plugin specification on top of unix sockets
+// AuthZSrv implements the authz plugin specification on top of unix sockets
 // the authZSrv uses two core components to manage the flow, the authorizer,
 // which is used to perform the actual authorization and the auditor, which
 // is used to audit the authorization flow
-type authZSrv struct {
+type AuthZSrv struct {
 	authorizer Authorizer   // authorizer is the concrete handler for plugins
 	auditor    Auditor      // auditor is used to audit input/output
 	listener   net.Listener // listener is the plugin socket listener
 }
 
 // NewAuthZSrv creates a new authorization server
-func NewAuthZSrv(plugin Authorizer, auditor Auditor) *authZSrv {
-	return &authZSrv{authorizer: plugin, auditor: auditor}
+func NewAuthZSrv(plugin Authorizer, auditor Auditor) *AuthZSrv {
+	return &AuthZSrv{authorizer: plugin, auditor: auditor}
 }
 
-// Starts start the authorization server
-func (a *authZSrv) Start() error {
+// Start starts the authorization server
+func (a *AuthZSrv) Start() error {
 
 	err := a.authorizer.Init()
 
@@ -70,7 +70,7 @@ func (a *authZSrv) Start() error {
 		w.Write(b)
 	})
 
-	router.HandleFunc(fmt.Sprintf("/", authorization.AuthZApiRequest), func(w http.ResponseWriter, r *http.Request) {
+	router.HandleFunc(fmt.Sprintf("/%s", authorization.AuthZApiRequest), func(w http.ResponseWriter, r *http.Request) {
 
 		defer r.Body.Close()
 		body, err := ioutil.ReadAll(r.Body)
@@ -98,7 +98,7 @@ func (a *authZSrv) Start() error {
 		writeResponse(w, authZRes)
 	})
 
-	router.HandleFunc(fmt.Sprintf("/", authorization.AuthZApiResponse), func(w http.ResponseWriter, r *http.Request) {
+	router.HandleFunc(fmt.Sprintf("/%s", authorization.AuthZApiResponse), func(w http.ResponseWriter, r *http.Request) {
 
 		defer r.Body.Close()
 		body, err := ioutil.ReadAll(r.Body)
@@ -124,8 +124,8 @@ func (a *authZSrv) Start() error {
 	return http.Serve(a.listener, router)
 }
 
-// Stop stop the authorization server
-func (a *authZSrv) Stop() {
+// Stop stops the authorization server
+func (a *AuthZSrv) Stop() {
 
 	if a.listener == nil {
 		logrus.Warnf("Listener is nil")

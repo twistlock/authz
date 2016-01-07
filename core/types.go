@@ -1,59 +1,85 @@
 package core
 
 var (
-	ActionContainerArchive        string = "container_archive"
-	ActionContainerArchiveExtract string = "container_archive_extract"
-	ActionContainerArchiveHead    string = "container_archive_head"
-	ActionContainerAttach         string = "container_attach"
-	ActionContainerAttachWs       string = "container_attachws"
-	ActionContainerChanges        string = "container_changes"
-	ActionContainerCommit         string = "container_commit"
-	ActionContainerCopyFiles      string = "container_copyfiles"
-	ActionContainerCreate         string = "container_create"
-	ActionContainerDelete         string = "container_delete"
-	ActionContainerExecCreate     string = "container_exec_create"
-	ActionContainerExecInspect    string = "container_exec_inspect"
-	ActionContainerExecStart      string = "container_exec_start"
-	ActionContainerExport         string = "container_export"
-	ActionContainerInspect        string = "container_inspect"
-	ActionContainerKill           string = "container_kill"
-	ActionContainerList           string = "container_list"
-	ActionContainerLogs           string = "container_logs"
-	ActionContainerPause          string = "container_pause"
-	ActionContainerRename         string = "container_rename"
-	ActionContainerResize         string = "container_resize"
-	ActionContainerRestart        string = "container_restart"
-	ActionContainerStart          string = "container_start"
-	ActionContainerStats          string = "container_stats"
-	ActionContainerStop           string = "container_stop"
-	ActionContainerTop            string = "container_top"
-	ActionContainerUnpause        string = "container_unpause"
-	ActionContainerWait           string = "container_wait"
-	ActionDockerCheckAuth         string = "docker_auth"
-	ActionDockerEvents            string = "docker_events"
-	ActionDockerInfo              string = "docker_info"
-	ActionDockerPing              string = "docker_ping"
-	ActionDockerVersion           string = "docker_version"
-	ActionImageArchive            string = "images_archive"
-	ActionImageBuild              string = "image_build"
-	ActionImageCreate             string = "image_create"
-	ActionImageDelete             string = "image_delete"
-	ActionImageHistory            string = "image_history"
-	ActionImageInspect            string = "image_inspect"
-	ActionImageList               string = "image_list"
-	ActionImageLoad               string = "images_load"
-	ActionImagePush               string = "image_push"
-	ActionImagesSearch            string = "images_search"
-	ActionImageTag                string = "image_tag"
-	ActionVolumeList           string = "volume_list"
-	ActionVolumeCreate         string = "volume_create"
-	ActionVolumeInspect        string = "volume_inspect"
-	ActionVolumeRemove         string = "volume_remove"
-	ActionNetworkList          string = "network_list"
-	ActionNetworkInspect       string = "network_inspect"
-	ActionNetworkCreate        string = "network_create"
-	ActionNetworkConnect       string = "network_connect"
-	ActionNetworkDisconnect    string = "network_disconnect"
-	ActionNetworkRemove        string = "network_remove"
-	ActionNone                    string = ""
+	// ActionContainerArchive describes https://docs.docker.com/engine/reference/api/docker_remote_api_v1.21/#get-an-archive-of-a-filesystem-resource-in-a-container
+	ActionContainerArchive = "container_archive"
+	// ActionContainerArchiveExtract describes https://docs.docker.com/engine/reference/api/docker_remote_api_v1.21/#extract-an-archive-of-files-or-folders-to-a-directory-in-a-container
+	ActionContainerArchiveExtract = "container_archive_extract"
+	// ActionContainerArchiveInfo describes https://docs.docker.com/engine/reference/api/docker_remote_api_v1.21/#retrieving-information-about-files-and-folders-in-a-container
+	ActionContainerArchiveInfo = "container_archive_info"
+	// ActionContainerAttach describes https://docs.docker.com/engine/reference/api/docker_remote_api_v1.21/#attach-to-a-container
+	ActionContainerAttach = "container_attach"
+	// ActionContainerAttachWs describes https://docs.docker.com/engine/reference/api/docker_remote_api_v1.21/#attach-to-a-container-websocket
+	ActionContainerAttachWs = "container_attach_websocket"
+
+	// ActionContainerChanges describes https://docs.docker.com/engine/reference/api/docker_remote_api_v1.21/#inspect-changes-on-a-container-s-filesystem
+	ActionContainerChanges = "container_changes"
+	// ActionContainerCommit describes https://docs.docker.com/engine/reference/api/docker_remote_api_v1.21/#create-a-new-image-from-a-container-s-changes
+	ActionContainerCommit = "container_commit"
+	// ActionContainerCopyFiles describes https://docs.docker.com/engine/reference/api/docker_remote_api_v1.21/#copy-files-or-folders-from-a-container
+	ActionContainerCopyFiles = "container_copyfiles"
+	// ActionContainerCreate describes https://docs.docker.com/engine/reference/api/docker_remote_api_v1.21/#create-a-container
+	ActionContainerCreate = "container_create"
+	ActionContainerDelete = "container_delete"
+	// ActionContainerExecCreate describes https://docs.docker.com/engine/reference/api/docker_remote_api_v1.21/#exec-create
+	ActionContainerExecCreate  = "container_exec_create"
+	ActionContainerExecInspect = "container_exec_inspect"
+	ActionContainerExecStart   = "container_exec_start"
+	ActionContainerExport      = "container_export"
+	ActionContainerInspect     = "container_inspect"
+	ActionContainerKill        = "container_kill"
+	// ActionContainerList describes https://docs.docker.com/engine/reference/api/docker_remote_api_v1.21/#list-containers
+	ActionContainerList = "container_list"
+	// ActionContainerLogs describes https://docs.docker.com/engine/reference/api/docker_remote_api_v1.21/#get-container-logs
+	ActionContainerLogs = "container_logs"
+	// ActionContainerPause describes https://docs.docker.com/engine/reference/api/docker_remote_api_v1.21/#pause-a-container
+	ActionContainerPause = "container_pause"
+	// ActionContainerRename describes https://docs.docker.com/engine/reference/api/docker_remote_api_v1.21/#rename-a-container
+	ActionContainerRename = "container_rename"
+	// ActionContainerResize describes https://docs.docker.com/engine/reference/api/docker_remote_api_v1.21/#resize-a-container-tty
+	ActionContainerResize = "container_resize"
+	// ActionContainerRestart describes https://docs.docker.com/engine/reference/api/docker_remote_api_v1.21/#restart-a-container
+	ActionContainerRestart = "container_restart"
+	ActionContainerStart   = "container_start"
+	ActionContainerStats   = "container_stats"
+	ActionContainerStop    = "container_stop"
+	ActionContainerTop     = "container_top"
+	ActionContainerUnpause = "container_unpause"
+	// ActionContainerWait describes https://docs.docker.com/engine/reference/api/docker_remote_api_v1.21/#wait-a-container
+	ActionContainerWait = "container_wait"
+	// ActionDockerCheckAuth describes https://docs.docker.com/engine/reference/api/docker_remote_api_v1.21/#check-auth-configuration
+	ActionDockerCheckAuth = "docker_auth"
+	// ActionDockerEvents describes https://docs.docker.com/engine/reference/api/docker_remote_api_v1.21/#monitor-docker-s-events
+	ActionDockerEvents = "docker_events"
+	// ActionDockerInfo describes https://docs.docker.com/engine/reference/api/docker_remote_api_v1.21/#display-system-wide-information
+	ActionDockerInfo    = "docker_info"
+	ActionDockerPing    = "docker_ping"
+	ActionDockerVersion = "docker_version"
+	ActionImageArchive  = "images_archive"
+	ActionImageBuild    = "image_build"
+	// ActionImageCreate describes https://docs.docker.com/engine/reference/api/docker_remote_api_v1.21/#create-an-image
+	ActionImageCreate  = "image_create"
+	ActionImageDelete  = "image_delete"
+	ActionImageHistory = "image_history"
+	ActionImageInspect = "image_inspect"
+	ActionImageList    = "image_list"
+	ActionImageLoad    = "images_load"
+	ActionImagePush    = "image_push"
+	ActionImagesSearch = "images_search"
+	ActionImageTag     = "image_tag"
+	ActionVolumeList   = "volume_list"
+	// ActionVolumeCreate describes https://docs.docker.com/engine/reference/api/docker_remote_api_v1.21/#create-a-volume
+	ActionVolumeCreate  = "volume_create"
+	ActionVolumeInspect = "volume_inspect"
+	// ActionVolumeRemove describes https://docs.docker.com/engine/reference/api/docker_remote_api_v1.21/#remove-a-volume
+	ActionVolumeRemove = "volume_remove"
+	// ActionNetworkList describes https://docs.docker.com/engine/reference/api/docker_remote_api_v1.21/#list-networks
+	ActionNetworkList    = "network_list"
+	ActionNetworkInspect = "network_inspect"
+	// ActionNetworkCreate describes https://docs.docker.com/engine/reference/api/docker_remote_api_v1.21/#create-a-network
+	ActionNetworkCreate     = "network_create"
+	ActionNetworkConnect    = "network_connect"
+	ActionNetworkDisconnect = "network_disconnect"
+	ActionNetworkRemove     = "network_remove"
+	ActionNone              = ""
 )

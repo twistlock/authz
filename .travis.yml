@@ -1,0 +1,18 @@
+language: go
+sudo: required
+go:
+  - 1.5.2
+env:
+  - GOARCH=amd64 DOCKER_VERSION=1.7.1
+  - GOARCH=386   DOCKER_VERSION=1.7.1
+  - GOARCH=amd64 DOCKER_VERSION=1.8.3
+  - GOARCH=386   DOCKER_VERSION=1.8.3
+  - GOARCH=amd64 DOCKER_VERSION=1.9.1
+  - GOARCH=386   DOCKER_VERSION=1.9.1
+install:
+  - make all
+script:
+  - docker login -e="$DOCKER_EMAIL" -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
+  - docker push twistlock/authz
+services:
+  - docker

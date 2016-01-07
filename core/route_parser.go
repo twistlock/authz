@@ -44,7 +44,8 @@ var routes = []route{
 	route{pattern: "/containers/.+/copy", method: "POST", action: ActionContainerCopyFiles},
 	// https://docs.docker.com/reference/api/docker_remote_api_v1.21/#extract-an-archive-of-files-or-folders-to-a-directory-in-a-container
 	route{pattern: "/containers/.+/archive", method: "PUT", action: ActionContainerArchiveExtract},
-	route{pattern: "/containers/.+/archive", method: "HEAD", action: ActionContainerArchiveHead},
+	route{pattern: "/containers/.+/archive", method: "HEAD", action: ActionContainerArchiveInfo},
+	// https://docs.docker.com/engine/reference/api/docker_remote_api_v1.21/#get-an-archive-of-a-filesystem-resource-in-a-container
 	route{pattern: "/containers/.+/archive", method: "GET", action: ActionContainerArchive},
 	// https://docs.docker.com/reference/api/docker_remote_api_v1.21/#attach-to-a-container-websocket
 	route{pattern: "/containers/.+/attach/ws", method: "GET", action: ActionContainerAttachWs},

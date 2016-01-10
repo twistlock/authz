@@ -55,7 +55,7 @@ var routes = []route{
 	route{pattern: "/containers/json", method: "GET", action: ActionContainerList},
 	// https://docs.docker.com/reference/api/docker_remote_api_v1.21/#inspect-a-container
 	route{pattern: "/containers/.+/json", method: "GET", action: ActionContainerInspect},
-	// // https://docs.docker.com/reference/api/docker_remote_api_v1.21/#remove-a-container
+	// https://docs.docker.com/reference/api/docker_remote_api_v1.21/#remove-a-container
 	route{pattern: "/containers/.+", method: "DELETE", action: ActionContainerDelete},
 	// https://docs.docker.com/reference/api/docker_remote_api_v1.21/#rename-a-container
 	route{pattern: "/containers/.+/rename", method: "POST", action: ActionContainerRename},

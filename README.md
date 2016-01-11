@@ -1,13 +1,13 @@
 # Twistlock AuthZ Broker
  
-Basic extendable Docker [authorization plugin] (https://github.com/docker/docker/blob/master/docs/extend/authorization.md) that runs on bare-metal or inside a container. The framework depends on [docker authentication plugin support] (https://github.com/docker/docker/pull/18514).
+A basic extendable Docker [authorization plugin] (https://github.com/docker/docker/blob/master/docs/extend/authorization.md) that runs on directly on the host or inside a container. The framework depends on [docker authentication plugin support] (https://github.com/docker/docker/pull/18514).
 Provided by [Twistlock] (https://www.twistlock.com).
 
 ![Twistlock Logo](https://www.twistlock.com/wp-content/uploads/2015/12/Twistlock-Logo.png)
 
 ## Basic policy enforcement 
 
-The authorization broker is delivered with a reference implementation of basic authorization mechanism, which consist of simple user policies evaluation. The  authorization behavior of the plugin in the basic authorization flow is determined from the policy object:
+The authorization broker is delivered as a reference implementation of a basic authorization mechanism, which consists of simple evaluation of user policies. The behavior of the plugin in the basic authorization flow is determined by the policy object:
 
 ```go
 // BasicPolicy represent a single policy object that is evaluated in the authorization flow.
@@ -30,7 +30,7 @@ type BasicPolicy struct {
 }
 ```
 
-For basic authorization flow, all policies reside in a single policy file under `/var/lib/twistlock/policy.json`. The file  is continuously monitored and no restart is required upon changes.
+For basic authorization flows, all policies reside in a single policy file under `/var/lib/twistlock/policy.json`. The file  is continuously monitored and no restart is required upon changes.
 The file format is [one policy JSON object per line](http://jsonlines.org/).  There should be no enclosing list or map, just one map per line.
 The policy file should be placed under `/var/lib/twistlock/policy.json`.
 
@@ -40,7 +40,7 @@ The conversation between [Docker remote API] (https://docs.docker.com/engine/ref
 
 Below are some examples for basic policy scenarios:
  1. Alice can run all Docker commands:                     `{"name":"policy_1","users":["alice"],"actions":["*"]}`
- 2. All users can all Docker commands:                    `{"name":"policy_2","users":["*"],"actions":["*"]}`
+ 2. All users can run all Docker commands:                    `{"name":"policy_2","users":["*"],"actions":["*"]}`
  3. Alice and Bob can create new containers:              `{"name":"policy_3","users":["alice","bob"],"actions":["container_create"]}`
  4. Service account can read logs and run container top:  `{"name":"policy_4","users":["service_account"],"actions":["container_logs","container_top"]}` 
  5. Alice can perform anything on containers: `{"name":"policy_5","users":["alice"],"actions":["container"]}` 
@@ -52,7 +52,7 @@ The authorization plugin can run as a container application or as a host service
 
 ### Running inside a container
 
- 1. Install the containerized version of Twistlock authorization plugin: 
+ 1. Install the containerized version of the Twistlock authorization plugin: 
 ```bash
  $ docker run -d  --restart=always -v /var/lib/twistlock/policy.json:/var/lib/twistlock/policy.json -v /run/docker/plugins/:/run/docker/plugins twistlock/authz
 ```
@@ -100,8 +100,8 @@ The authorization plugin can run as a container application or as a host service
 
 ## Extending the authorization
 
-The framework consists of two extendability interfaces, the Authorizer, 
-which handles the authorization flow and the Auditor, which audits the request and response in the authorization flow.
+The framework consists of two extendable interfaces: the Authorizer, 
+which handles the authorization flow; and the Auditor, which audits the request and response in the authorization flow.
 
 ```go
 // Authorizer handles the authorization of docker requests and responses

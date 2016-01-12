@@ -6,7 +6,6 @@ install:
   - go get golang.org/x/sys/unix
   - go get github.com/tools/godep
   - godep restore
-script:
   - make all
 services:
   - docker

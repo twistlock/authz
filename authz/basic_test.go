@@ -33,7 +33,7 @@ func TestPolicyApply(t *testing.T) {
 		{"POST", "/v1.21/containers/id/rename", "user_6", false, "policy_4"}, // Readonly policy - GET denied
 	}
 
-	handler := NewBasicAuthZHandler(&BasicAuthorizerSettings{PolicyPath: policyFileName})
+	handler := NewBasicAuthZAuthorizer(&BasicAuthorizerSettings{PolicyPath: policyFileName})
 
 	assert.NoError(t, handler.Init(), "Initialization must be succesfull")
 

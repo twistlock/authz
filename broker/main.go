@@ -2,11 +2,11 @@
 package main
 
 import (
-	"authz/authz"
-	"authz/core"
 	"fmt"
 	"github.com/codegangsta/cli"
 	"github.com/docker/docker/vendor/src/github.com/Sirupsen/logrus"
+	"github.com/twistlock/authz/authz"
+	"github.com/twistlock/authz/core"
 	"os"
 )
 
@@ -41,7 +41,7 @@ func main() {
 
 		switch c.GlobalString(handlerFlag) {
 		case handlerBasic:
-			authZHandler = authz.NewBasicAuthZHandler(&authz.BasicAuthorizerSettings{PolicyPath: c.GlobalString(policyFileFlag)})
+			authZHandler = authz.NewBasicAuthZAuthorizer(&authz.BasicAuthorizerSettings{PolicyPath: c.GlobalString(policyFileFlag)})
 		default:
 			panic(fmt.Sprintf("Unkwon authz hander %q", c.GlobalString(handlerFlag)))
 		}
@@ -77,7 +77,7 @@ func main() {
 
 		cli.StringFlag{
 			Name:   policyFileFlag,
-			Value:  "/var/lib/authz_broker/policy.json",
+			Value:  "/var/lib/authz-broker/policy.json",
 			EnvVar: "AUTHZ-POLICY-FILE",
 			Usage:  "Defines the authz policy file for basic handler",
 		},

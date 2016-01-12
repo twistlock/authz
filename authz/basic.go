@@ -1,12 +1,12 @@
 package authz
 
 import (
-	"authz/core"
 	"encoding/json"
 	"fmt"
 	"github.com/docker/docker/pkg/authorization"
 	"github.com/docker/docker/vendor/src/github.com/Sirupsen/logrus"
 	"github.com/howeyc/fsnotify"
+	"github.com/twistlock/authz/core"
 	"io/ioutil"
 	"path"
 	"regexp"
@@ -42,8 +42,8 @@ type BasicAuthorizerSettings struct {
 	PolicyPath string // PolicyPath is the path to the policy settings
 }
 
-// NewBasicAuthZHandler creates a new basic authz handler
-func NewBasicAuthZHandler(settings *BasicAuthorizerSettings) core.Authorizer {
+// NewBasicAuthZAuthorizer creates a new basic authorizer
+func NewBasicAuthZAuthorizer(settings *BasicAuthorizerSettings) core.Authorizer {
 	return &basicAuthorizer{settings: settings}
 }
 

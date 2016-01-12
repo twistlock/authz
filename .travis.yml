@@ -2,17 +2,11 @@ language: go
 sudo: required
 go:
   - 1.5.2
-env:
-  - GOARCH=amd64 DOCKER_VERSION=1.7.1
-  - GOARCH=386   DOCKER_VERSION=1.7.1
-  - GOARCH=amd64 DOCKER_VERSION=1.8.3
-  - GOARCH=386   DOCKER_VERSION=1.8.3
-  - GOARCH=amd64 DOCKER_VERSION=1.9.1
-  - GOARCH=386   DOCKER_VERSION=1.9.1
 install:
-  - make all
+  - go get golang.org/x/sys/unix
+  - go get github.com/tools/godep
+  - godep restore
 script:
-  - docker login -e="$DOCKER_EMAIL" -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
-  - docker push twistlock/authz-broker
+  - make all
 services:
   - docker

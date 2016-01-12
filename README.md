@@ -30,7 +30,7 @@ type BasicPolicy struct {
 }
 ```
 
-For basic authorization flows, all policies reside in a single policy file under `/var/lib/authz_broker/policy.json`. The file  is continuously monitored and no restart is required upon changes.
+For basic authorization flows, all policies reside in a single policy file under `/var/lib/authz-broker/policy.json`. The file  is continuously monitored and no restart is required upon changes.
 The file format is [one policy JSON object per line](http://jsonlines.org/).  There should be no enclosing list or map, just one map per line.
 
 The conversation between [Docker remote API] (https://docs.docker.com/engine/reference/api/docker_remote_api_v1.21/) (the URI and method that are passed Docker daemon to AuthZ plugin) to internal action parameters is defined by the [route parser] (https://github.com/twistlock/authz/blob/master/core/route_parser.go).
@@ -53,7 +53,7 @@ The authorization plugin can run as a container application or as a host service
 
  1. Install the containerized version of the Twistlock authorization plugin: 
 ```bash
- $ docker run -d  --restart=always -v /var/lib/authz_broker/policy.json:/var/lib/authz_broker/policy.json -v /run/docker/plugins/:/run/docker/plugins twistlock/authz_broker
+ $ docker run -d  --restart=always -v /var/lib/authz-broker/policy.json:/var/lib/authz-broker/policy.json -v /run/docker/plugins/:/run/docker/plugins twistlock/authz-broker
 ```
  2. Update Docker daemon to run with authorization enabled.
     For example, if Docker is installed as a systemd service:
@@ -62,7 +62,7 @@ The authorization plugin can run as a container application or as a host service
 ```
  3. Add authz broker plugin parameter to ExecStart parameter
 ```bash
-  ExecStart=/usr/bin/docker daemon -H fd:// --authz-plugin=authz_broker 
+  ExecStart=/usr/bin/docker daemon -H fd:// --authz-plugin=authz-broker 
 ```
 ### Running as a stand-alone service
 
@@ -78,7 +78,7 @@ The authorization plugin can run as a container application or as a host service
 ```
   add authz-plugin parameter to ExecStart parameter
 ```bash
-   ExecStart=/usr/bin/docker daemon -H fd:// --authz-plugin=authz_broker 
+   ExecStart=/usr/bin/docker daemon -H fd:// --authz-plugin=authz-broker 
 ``` 
   
 # Dev environment

@@ -14,7 +14,7 @@ import (
 )
 
 const (
-	pluginName   = "authz_broker"
+	pluginName   = "authz-broker"
 	pluginFolder = "/run/docker/plugins"
 )
 

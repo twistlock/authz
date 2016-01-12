@@ -185,17 +185,33 @@ func NewBasicAuditor() core.Auditor {
 	return &basicAuditor{}
 }
 
-// TODO: Check nil
 func (f *basicAuditor) AuditRequest(req *authorization.Request, pluginRes *authorization.Response) {
-	logrus.Debugf("Request: method:%s' uri:'%s' user:'%s' allow:'%t' plugin msg:'%s'", req.RequestMethod, req.RequestURI, req.User, pluginRes.Allow, pluginRes.Msg)
+
+	if req == nil {
+		logrus.Errorf("Authorization request is nil")
+		return
+	}
+
+	if pluginRes == nil {
+		logrus.Errorf("Authorization response is nil")
+		return
+	}
+
+	fields := logrus.Fields{
+		"method": req.RequestMethod,
+		"uri": req.RequestURI,
+		"user": req.User,
+		"allow": pluginRes.Allow,
+		"msg": pluginRes.Msg,
+	}
+
+	if pluginRes != nil ||pluginRes.Err != "" {
+		fields["err"] = pluginRes.Err
+	}
+
+	logrus.WithFields(fields).Info("Request")
 }
 
 func (f *basicAuditor) AuditResponse(req *authorization.Request, pluginRes *authorization.Response) {
-	logrus.Debugf("Response: method:%s' uri:'%s' user:'%s' daeomn status code '%d' allow:'%t' plugin msg:'%s'",
-		req.RequestMethod,
-		req.RequestURI,
-		req.User,
-		req.ResponseStatusCode,
-		pluginRes.Allow,
-		pluginRes.Msg)
+	// Only log requests
 }

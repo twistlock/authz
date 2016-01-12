@@ -10,3 +10,6 @@ script:
   - make all
 services:
   - docker
+branches:
+  only:
+    - master

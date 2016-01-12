@@ -33,13 +33,22 @@ func TestPolicyApply(t *testing.T) {
 		{"POST", "/v1.21/containers/id/rename", "user_6", false, "policy_4"}, // Readonly policy - GET denied
 	}
 
-	handler := NewBasicAuthZAuthorizer(&BasicAuthorizerSettings{PolicyPath: policyFileName})
+	authorizer := NewBasicAuthZAuthorizer(&BasicAuthorizerSettings{PolicyPath: policyFileName})
 
-	assert.NoError(t, handler.Init(), "Initialization must be succesfull")
+	assert.NoError(t, authorizer.Init(), "Initialization must be succesfull")
 
 	for _, test := range tests {
-		res := handler.AuthZReq(&authorization.Request{RequestMethod: test.method, RequestURI: test.uri, User: test.user})
+		res := authorizer.AuthZReq(&authorization.Request{RequestMethod: test.method, RequestURI: test.uri, User: test.user})
 		assert.Equal(t, res.Allow, test.allow, "Request must be allowed/denied based on policy")
 		assert.Contains(t, res.Msg, test.expectedPolicy, "Policy name must appear in the response")
 	}
+}
+
+func TestAuditRequest(t *testing.T) {
+	auditor := NewBasicAuditor()
+	auditor.AuditRequest(&authorization.Request{User:"user"}, &authorization.Response{Allow:true})
+	auditor.AuditRequest(&authorization.Request{User:"user"}, nil)
+	auditor.AuditRequest(nil, &authorization.Response{
+		Err:"err",
+	})
 }

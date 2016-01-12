@@ -14,7 +14,7 @@ import (
 )
 
 const (
-	pluginName   = "twistlock"
+	pluginName   = "authz_broker"
 	pluginFolder = "/run/docker/plugins"
 )
 

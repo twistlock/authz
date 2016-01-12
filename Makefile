@@ -20,13 +20,13 @@ lint:
 	$(foreach file,$(SRCS),golint $(file) || exit;)
 
 image: test
-	docker build -t twistlock/authz .
+	docker build -t twistlock/authz_broker .
 
 binary: lint fmt vet
-	CGO_ENABLED=0 go build  -o twistlock_authz_plugin -a -installsuffix cgo ./broker/main.go
+	CGO_ENABLED=0 go build  -o authz_broker -a -installsuffix cgo ./broker/main.go
 
 test:  binary
 	go test -v ./...
 
 clean:
-	rm twistlock_authz_plugin
+	rm authz_broker

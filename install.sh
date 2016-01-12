@@ -10,7 +10,7 @@ Description=Twistlock docker authorization plugin
 After=syslog.target
 [Service]
 Type=simple
-ExecStart=/usr/bin/twistlock_authz_broker
+ExecStart=/usr/bin/authz_broker
 [Install]
 WantedBy=multi-user.target
 SERVICE

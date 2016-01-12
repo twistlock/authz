@@ -30,9 +30,8 @@ type BasicPolicy struct {
 }
 ```
 
-For basic authorization flows, all policies reside in a single policy file under `/var/lib/twistlock/policy.json`. The file  is continuously monitored and no restart is required upon changes.
+For basic authorization flows, all policies reside in a single policy file under `/var/lib/authz_broker/policy.json`. The file  is continuously monitored and no restart is required upon changes.
 The file format is [one policy JSON object per line](http://jsonlines.org/).  There should be no enclosing list or map, just one map per line.
-The policy file should be placed under `/var/lib/twistlock/policy.json`.
 
 The conversation between [Docker remote API] (https://docs.docker.com/engine/reference/api/docker_remote_api_v1.21/) (the URI and method that are passed Docker daemon to AuthZ plugin) to internal action parameters is defined by the [route parser] (https://github.com/twistlock/authz/blob/master/core/route_parser.go).
 
@@ -54,20 +53,20 @@ The authorization plugin can run as a container application or as a host service
 
  1. Install the containerized version of the Twistlock authorization plugin: 
 ```bash
- $ docker run -d  --restart=always -v /var/lib/twistlock/policy.json:/var/lib/twistlock/policy.json -v /run/docker/plugins/:/run/docker/plugins twistlock/authz
+ $ docker run -d  --restart=always -v /var/lib/authz_broker/policy.json:/var/lib/authz_broker/policy.json -v /run/docker/plugins/:/run/docker/plugins twistlock/authz_broker
 ```
  2. Update Docker daemon to run with authorization enabled.
     For example, if Docker is installed as a systemd service:
 ```bash
  $ sudo systemctl edit --full docker.service 
 ```
- 3. Add authz-plugin parameter to ExecStart parameter
+ 3. Add authz broker plugin parameter to ExecStart parameter
 ```bash
-  ExecStart=/usr/bin/docker daemon -H fd:// --authz-plugin=twistlock 
+  ExecStart=/usr/bin/docker daemon -H fd:// --authz-plugin=authz_broker 
 ```
 ### Running as a stand-alone service
 
- *  Download Twistlock authz binary (todo:link)
+ *  Download Twistlock authZ binary (todo:link)
  *  Install Twistlock as a service 
 ```bash
    $ wget xxx | sudo sh
@@ -79,7 +78,7 @@ The authorization plugin can run as a container application or as a host service
 ```
   add authz-plugin parameter to ExecStart parameter
 ```bash
-   ExecStart=/usr/bin/docker daemon -H fd:// --authz-plugin=twistlock 
+   ExecStart=/usr/bin/docker daemon -H fd:// --authz-plugin=authz_broker 
 ``` 
   
 # Dev environment

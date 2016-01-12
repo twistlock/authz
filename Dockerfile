@@ -4,6 +4,6 @@ MAINTAINER Liron Levin <liron@twistlock.com>
 VOLUME /var/lib/twistlock/policy.json
 VOLUME /run/docker/plugins/
 
-ADD ./twistlock_authz_plugin         /var/lib/twistlock/twistlock_authz_plugin
+ADD ./authz_broker  /usr/bin/authz_broker
 
-CMD ["/var/lib/twistlock/twistlock_authz_plugin"]
+CMD ["/usr/bin/authz_broker"]

@@ -77,7 +77,7 @@ func main() {
 
 		cli.StringFlag{
 			Name:   policyFileFlag,
-			Value:  "/var/lib/twistlock/policy.json",
+			Value:  "/var/lib/authz_broker/policy.json",
 			EnvVar: "AUTHZ-POLICY-FILE",
 			Usage:  "Defines the authz policy file for basic handler",
 		},

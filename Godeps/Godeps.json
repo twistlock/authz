@@ -11,6 +11,11 @@
 			"Rev": "446d1c146faa8ed3f4218f056fcd165f6bcfda81"
 		},
 		{
+			"ImportPath": "github.com/codegangsta/cli",
+			"Comment": "1.2.0-139-g142e6cd",
+			"Rev": "142e6cd241a4dfbf7f07a018f1f8225180018da4"
+		},
+		{
 			"ImportPath": "github.com/docker/docker/pkg/authorization",
 			"Comment": "v1.4.1-8928-g09ad1bb",
 			"Rev": "09ad1bbc5897e34c6e6d5612b0e1ba709ed28a7d"
@@ -22,11 +27,6 @@
 		},
 		{
 			"ImportPath": "github.com/docker/docker/vendor/src/github.com/Sirupsen/logrus",
-			"Comment": "v1.4.1-8928-g09ad1bb",
-			"Rev": "09ad1bbc5897e34c6e6d5612b0e1ba709ed28a7d"
-		},
-		{
-			"ImportPath": "github.com/docker/docker/vendor/src/github.com/gorilla/mux",
 			"Comment": "v1.4.1-8928-g09ad1bb",
 			"Rev": "09ad1bbc5897e34c6e6d5612b0e1ba709ed28a7d"
 		},
@@ -43,6 +43,10 @@
 		{
 			"ImportPath": "github.com/gorilla/context",
 			"Rev": "1c83b3eabd45b6d76072b66b746c20815fb2872d"
+		},
+		{
+			"ImportPath": "github.com/gorilla/mux",
+			"Rev": "ee1815431e497d3850809578c93ab6705f1a19f7"
 		},
 		{
 			"ImportPath": "github.com/howeyc/fsnotify",

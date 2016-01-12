@@ -46,9 +46,9 @@ func TestPolicyApply(t *testing.T) {
 
 func TestAuditRequest(t *testing.T) {
 	auditor := NewBasicAuditor()
-	auditor.AuditRequest(&authorization.Request{User:"user"}, &authorization.Response{Allow:true})
-	auditor.AuditRequest(&authorization.Request{User:"user"}, nil)
+	auditor.AuditRequest(&authorization.Request{User: "user"}, &authorization.Response{Allow: true})
+	auditor.AuditRequest(&authorization.Request{User: "user"}, nil)
 	auditor.AuditRequest(nil, &authorization.Response{
-		Err:"err",
+		Err: "err",
 	})
 }

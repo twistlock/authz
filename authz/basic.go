@@ -199,13 +199,13 @@ func (f *basicAuditor) AuditRequest(req *authorization.Request, pluginRes *autho
 
 	fields := logrus.Fields{
 		"method": req.RequestMethod,
-		"uri": req.RequestURI,
-		"user": req.User,
-		"allow": pluginRes.Allow,
-		"msg": pluginRes.Msg,
+		"uri":    req.RequestURI,
+		"user":   req.User,
+		"allow":  pluginRes.Allow,
+		"msg":    pluginRes.Msg,
 	}
 
-	if pluginRes != nil ||pluginRes.Err != "" {
+	if pluginRes != nil || pluginRes.Err != "" {
 		fields["err"] = pluginRes.Err
 	}
 

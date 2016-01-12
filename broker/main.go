@@ -1,4 +1,4 @@
-// Entry point for Twistlock authorization plugin
+// broker consists of the entry point for the twistlock authz broker
 package main
 
 import (
@@ -12,13 +12,13 @@ import (
 
 const (
 	debugFlag      = "debug"
-	handlerFlag    = "authz-handler"
+	authorizerFlag = "authz-handler"
 	auditorFlag    = "auditor"
 	policyFileFlag = "policy-file"
 )
 
 const (
-	handlerBasic = "basic"
+	authorizerBasic = "basic"
 )
 
 const (
@@ -39,18 +39,18 @@ func main() {
 		var auditor core.Auditor
 		var authZHandler core.Authorizer
 
-		switch c.GlobalString(handlerFlag) {
-		case handlerBasic:
+		switch c.GlobalString(authorizerFlag) {
+		case authorizerBasic:
 			authZHandler = authz.NewBasicAuthZAuthorizer(&authz.BasicAuthorizerSettings{PolicyPath: c.GlobalString(policyFileFlag)})
 		default:
-			panic(fmt.Sprintf("Unkwon authz hander %q", c.GlobalString(handlerFlag)))
+			panic(fmt.Sprintf("Unkwon authz hander %q", c.GlobalString(authorizerFlag)))
 		}
 
 		switch c.GlobalString(auditorFlag) {
 		case auditorBasic:
 			auditor = authz.NewBasicAuditor()
 		default:
-			panic(fmt.Sprintf("Unkwon authz hander %q", c.GlobalString(handlerFlag)))
+			panic(fmt.Sprintf("Unkwon authz hander %q", c.GlobalString(authorizerFlag)))
 		}
 
 		srv := core.NewAuthZSrv(authZHandler, auditor)
@@ -69,9 +69,9 @@ func main() {
 		},
 
 		cli.StringFlag{
-			Name:   handlerFlag,
-			Value:  handlerBasic,
-			EnvVar: "AUTHZ-HANDLER",
+			Name:   authorizerFlag,
+			Value:  authorizerBasic,
+			EnvVar: "AUTHORIZER",
 			Usage:  "Defines the authz handler type",
 		},
 
@@ -85,7 +85,7 @@ func main() {
 		cli.StringFlag{
 			Name:   auditorFlag,
 			Value:  auditorBasic,
-			EnvVar: "AUTHZ-AUDITOR",
+			EnvVar: "AUDITOR",
 			Usage:  "Defines the authz auditor type",
 		},
 	}

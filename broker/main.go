@@ -11,10 +11,11 @@ import (
 )
 
 const (
-	debugFlag      = "debug"
-	authorizerFlag = "authz-handler"
-	auditorFlag    = "auditor"
-	policyFileFlag = "policy-file"
+	debugFlag       = "debug"
+	authorizerFlag  = "authz-handler"
+	auditorFlag     = "auditor"
+	auditorHookFlag = "auditor-hook"
+	policyFileFlag  = "policy-file"
 )
 
 const (
@@ -48,7 +49,7 @@ func main() {
 
 		switch c.GlobalString(auditorFlag) {
 		case auditorBasic:
-			auditor = authz.NewBasicAuditor()
+			auditor = authz.NewBasicAuditor(&authz.BasicAuditorSettings{LogHook: c.GlobalString(auditorHookFlag)})
 		default:
 			panic(fmt.Sprintf("Unkwon authz hander %q", c.GlobalString(authorizerFlag)))
 		}
@@ -87,6 +88,12 @@ func main() {
 			Value:  auditorBasic,
 			EnvVar: "AUDITOR",
 			Usage:  "Defines the authz auditor type",
+		},
+		cli.StringFlag{
+			Name:   auditorHookFlag,
+			Value:  authz.AuditHookStdout,
+			EnvVar: "AUDITOR-HOOK",
+			Usage:  "Defines the authz auditor hook type (log engine)",
 		},
 	}
 

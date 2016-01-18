@@ -1,7 +1,7 @@
 language: go
 sudo: required
 go:
-  - 1.5.2
+  - 1.5.3
 install:
   - go get golang.org/x/sys/unix
   - go get github.com/tools/godep

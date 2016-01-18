@@ -44,11 +44,23 @@ func TestPolicyApply(t *testing.T) {
 	}
 }
 
-func TestAuditRequest(t *testing.T) {
-	auditor := NewBasicAuditor()
-	auditor.AuditRequest(&authorization.Request{User: "user"}, &authorization.Response{Allow: true})
-	auditor.AuditRequest(&authorization.Request{User: "user"}, nil)
-	auditor.AuditRequest(nil, &authorization.Response{
-		Err: "err",
-	})
+func TestAuditRequestStdout(t *testing.T) {
+	auditor := NewBasicAuditor(&BasicAuditorSettings{LogHook: AuditHookStdout})
+	assert.NoError(t, auditor.AuditRequest(&authorization.Request{User: "user"}, &authorization.Response{Allow: true}))
+	assert.Error(t, auditor.AuditRequest(&authorization.Request{User: "user"}, nil), "Missing request")
+	assert.Error(t, auditor.AuditRequest(nil, &authorization.Response{Err: "err"}), "Missing plugin response")
+}
+
+func TestAuditRequestSyslog(t *testing.T) {
+	auditor := NewBasicAuditor(&BasicAuditorSettings{LogHook: AuditHookSyslog})
+	assert.NoError(t, auditor.AuditRequest(&authorization.Request{User: "user"}, &authorization.Response{Allow: true}))
+}
+
+func TestAuditRequestFile(t *testing.T) {
+	logPath := "/tmp/auth-broker.log"
+	auditor := NewBasicAuditor(&BasicAuditorSettings{LogHook: AuditHookFile, LogPath: logPath})
+	assert.NoError(t, auditor.AuditRequest(&authorization.Request{User: "user"}, &authorization.Response{Allow: true}))
+	log, err := ioutil.ReadFile(logPath)
+	assert.NoError(t, err)
+	assert.Contains(t, string(log), "allow", "Log doesn't container authorization data")
 }

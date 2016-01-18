@@ -34,6 +34,7 @@ For basic authorization flows, all policies reside in a single policy file under
 The file format is [one policy JSON object per line](http://jsonlines.org/).  There should be no enclosing list or map, just one map per line.
 
 The conversation between [Docker remote API] (https://docs.docker.com/engine/reference/api/docker_remote_api_v1.21/) (the URI and method that are passed Docker daemon to AuthZ plugin) to internal action parameters is defined by the [route parser] (https://github.com/twistlock/authz/blob/master/core/route_parser.go).
+All requests and their associated authorization responses are logged to the standard output. Additional hooks such as syslog and log file is also available. To add additional [logrus hooks] (https://github.com/Sirupsen/logrus#hooks), see [extending the authorization plugin].
 
 ### Examples
 
@@ -49,12 +50,15 @@ Below are some examples for basic policy scenarios:
 
 The authorization plugin can run as a container application or as a host service.
 
-### Running inside a container
+### Running inside a container 
 
  1. Install the containerized version of the Twistlock authorization plugin: 
 ```bash
  $ docker run -d  --restart=always -v /var/lib/authz-broker/policy.json:/var/lib/authz-broker/policy.json -v /run/docker/plugins/:/run/docker/plugins twistlock/authz-broker
 ```
+    For auditing using syslog hook add the following settings to the docker command:<code>-e AUDITOR-HOOK:syslog -v /dev/log:/dev/log</code>
+    For auditing using file add the following settings to the docker command:<code>-e AUDITOR-HOOK:file -v PATH_TO_LOCAL_LOG_FILE:/var/log/authz.log</code>
+
  2. Update Docker daemon to run with authorization enabled.
     For example, if Docker is installed as a systemd service:
 ```bash
@@ -97,7 +101,7 @@ The authorization plugin can run as a container application or as a host service
   $ make all
 ```
 
-## Extending the authorization
+## Extending the authorization plugin
 
 The framework consists of two extendable interfaces: the Authorizer, 
 which handles the authorization flow; and the Auditor, which audits the request and response in the authorization flow.

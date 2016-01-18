@@ -94,7 +94,11 @@ func (a *AuthZSrv) Start() error {
 			logrus.Debugf(authZRes.Msg)
 		}
 
-		a.auditor.AuditRequest(&authReq, authZRes)
+		err = a.auditor.AuditRequest(&authReq, authZRes)
+		if err != nil {
+			logrus.Errorf("Failed to audit request '%v'", err)
+		}
+
 		writeResponse(w, authZRes)
 	})
 
@@ -117,7 +121,10 @@ func (a *AuthZSrv) Start() error {
 		}
 
 		authZRes := a.authorizer.AuthZRes(&authReq)
-		a.auditor.AuditResponse(&authReq, authZRes)
+		err = a.auditor.AuditResponse(&authReq, authZRes)
+		if err != nil {
+			logrus.Errorf("Failed to audit response '%v'", err)
+		}
 		writeResponse(w, authZRes)
 	})
 

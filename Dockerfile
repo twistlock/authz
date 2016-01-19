@@ -7,6 +7,9 @@ ENV AUTHORIZER basic
 # Indicates basic auditor type is used (log to console)
 ENV AUDITOR basic
 
+# Indicates audit logs are streamed to STDOUT
+ENV AUDITOR-HOOK ""
+
 VOLUME /var/lib/twistlock/policy.json
 VOLUME /run/docker/plugins/
 

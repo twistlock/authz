@@ -3,11 +3,14 @@ package authz
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/Sirupsen/logrus"
+	logrus_syslog "github.com/Sirupsen/logrus/hooks/syslog"
 	"github.com/docker/docker/pkg/authorization"
-	"github.com/docker/docker/vendor/src/github.com/Sirupsen/logrus"
 	"github.com/howeyc/fsnotify"
 	"github.com/twistlock/authz/core"
 	"io/ioutil"
+	"log/syslog"
+	"os"
 	"path"
 	"regexp"
 	"strings"
@@ -31,6 +34,15 @@ type BasicPolicy struct {
 	Name     string   `json:"name"`     // Name is the policy name
 	Readonly bool     `json:"readonly"` // Readonly indicates this policy only allow get commands
 }
+
+const (
+	AuditHookSyslog = "syslog" // AuditHookSyslog indicates logs are streamed  to local syslog
+	AuditHookFile   = "file"   // AuditHookFile indicates logs are streamed  to local syslog
+	AuditHookStdout = ""       // AuditHookStdout indicates logs are streamed to stdout
+)
+
+// defaultAuditLogPath is the file test hook log path
+const defaultAuditLogPath = "/var/log/authz-broker.log"
 
 type basicAuthorizer struct {
 	settings *BasicAuthorizerSettings
@@ -178,25 +190,37 @@ func (f *basicAuthorizer) AuthZRes(authZReq *authorization.Request) *authorizati
 
 // basicAuditor audit requset/response directly to standard output
 type basicAuditor struct {
+	logger   *logrus.Logger
+	settings *BasicAuditorSettings
 }
 
-// NewBasicAuditor returns a new authz auditor
-func NewBasicAuditor() core.Auditor {
-	return &basicAuditor{}
+// NewBasicAuditor returns a new authz auditor that uses the specified logging hook (e.g., syslog or stdout)
+func NewBasicAuditor(settings *BasicAuditorSettings) core.Auditor {
+	b := &basicAuditor{settings: settings}
+	return b
 }
 
-func (f *basicAuditor) AuditRequest(req *authorization.Request, pluginRes *authorization.Response) {
+// BasicAuditorSettings are settings used by the basic auditor
+type BasicAuditorSettings struct {
+	LogHook string // LogHook is the log hook used to audit authorization data
+	LogPath string // LogPath is the path to audit log file (if file hook is specified)
+}
+
+func (b *basicAuditor) AuditRequest(req *authorization.Request, pluginRes *authorization.Response) error {
 
 	if req == nil {
-		logrus.Errorf("Authorization request is nil")
-		return
+		return fmt.Errorf("Authorization request is nil")
 	}
 
 	if pluginRes == nil {
-		logrus.Errorf("Authorization response is nil")
-		return
+		return fmt.Errorf("Authorization response is nil")
 	}
 
+	err := b.init()
+	if err != nil {
+		return err
+	}
+	// Default - file
 	fields := logrus.Fields{
 		"method": req.RequestMethod,
 		"uri":    req.RequestURI,
@@ -209,9 +233,60 @@ func (f *basicAuditor) AuditRequest(req *authorization.Request, pluginRes *autho
 		fields["err"] = pluginRes.Err
 	}
 
-	logrus.WithFields(fields).Info("Request")
+	b.logger.WithFields(fields).Info("Request")
+	return nil
 }
 
-func (f *basicAuditor) AuditResponse(req *authorization.Request, pluginRes *authorization.Response) {
+func (b *basicAuditor) AuditResponse(req *authorization.Request, pluginRes *authorization.Response) error {
 	// Only log requests
+	return nil
+}
+
+// init inits the auditor logger
+func (b *basicAuditor) init() error {
+
+	if b.settings == nil {
+		return fmt.Errorf("Settings is not defeined")
+	}
+
+	if b.logger != nil {
+		return nil
+	}
+
+	b.logger = logrus.New()
+	b.logger.Formatter = &logrus.JSONFormatter{}
+
+	switch b.settings.LogHook {
+	case AuditHookSyslog:
+		{
+			hook, err := logrus_syslog.NewSyslogHook("", "", syslog.LOG_ERR, "authz")
+			if err != nil {
+				return err
+			}
+			b.logger.Hooks.Add(hook)
+		}
+	case AuditHookFile:
+		{
+			logPath := b.settings.LogPath
+			if logPath == "" {
+				logrus.Infof("Using default log file path '%s'", logPath)
+				logPath = defaultAuditLogPath
+			}
+
+			os.MkdirAll(path.Dir(logPath), 0700)
+			f, err := os.OpenFile(logPath, os.O_RDWR|os.O_CREATE|os.O_APPEND, 0750)
+			if err != nil {
+				return err
+			}
+			b.logger.Out = f
+		}
+	case AuditHookStdout:
+		{
+			// Default - stdout
+		}
+	default:
+		return fmt.Errorf("Wrong log hook value '%s'", b.settings.LogHook)
+	}
+
+	return nil
 }

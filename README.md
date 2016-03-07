@@ -2,6 +2,9 @@
 
 [![Travis](https://travis-ci.org/twistlock/authz.svg)](https://travis-ci.org/twistlock/authz)
 [![GoDoc](https://img.shields.io/badge/api-Godoc-blue.svg?style=flat-square)](https://godoc.org/github.com/twistlock/authz)
+[![Go Report Card](https://goreportcard.com/badge/github.com/twistlock/authz)](https://goreportcard.com/report/github.com/twistlock/authz)
+
+
  
 A basic extendable Docker [authorization plugin] (https://github.com/docker/docker/blob/master/docs/extend/authorization.md) that runs on directly on the host or inside a container. The framework depends on [docker authentication plugin support] (https://github.com/docker/docker/pull/18514).
 Provided by [Twistlock] (https://www.twistlock.com).

@@ -36,9 +36,14 @@ type BasicPolicy struct {
 }
 
 const (
-	AuditHookSyslog = "syslog" // AuditHookSyslog indicates logs are streamed  to local syslog
-	AuditHookFile   = "file"   // AuditHookFile indicates logs are streamed  to local syslog
-	AuditHookStdout = ""       // AuditHookStdout indicates logs are streamed to stdout
+	// AuditHookSyslog indicates logs are streamed  to local syslog
+	AuditHookSyslog = "syslog"
+
+	// AuditHookFile indicates logs are streamed  to local syslog
+	AuditHookFile = "file"
+
+	// AuditHookStdout indicates logs are streamed to stdout
+	AuditHookStdout = ""
 )
 
 // defaultAuditLogPath is the file test hook log path

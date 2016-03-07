@@ -1,0 +1,12 @@
+# AuthZ plugin generated files to ignore
+*.orig
+*.test
+.*.swp
+.DS_Store
+.bashrc
+.git/
+.gopath/
+.hg/
+.vagrant*
+Vagrantfile
+authz-broker

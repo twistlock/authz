@@ -4,7 +4,7 @@ package main
 import (
 	"fmt"
 	"github.com/codegangsta/cli"
-	"github.com/docker/docker/vendor/src/github.com/Sirupsen/logrus"
+	"github.com/Sirupsen/logrus"
 	"github.com/twistlock/authz/authz"
 	"github.com/twistlock/authz/core"
 	"os"

@@ -6,7 +6,7 @@
 
 
  
-A basic extendable Docker [authorization plugin] (https://github.com/docker/docker/blob/master/docs/extend/authorization.md) that runs on directly on the host or inside a container. The framework depends on [docker authentication plugin support] (https://github.com/docker/docker/pull/18514).
+A basic extendable Docker [authorization plugin] (https://github.com/docker/docker/blob/master/docs/extend/authorization.md) that runs on directly on the host or inside a container. The framework depends on [docker authentication plugin support] (https://github.com/docker/docker/pull/18514). Basic authorization is provided when Docker daemon is started with `--tlsverify` flag (username is extracted from the certificate common name).
 Provided by [Twistlock] (https://www.twistlock.com).
 
 ![Twistlock Logo](https://www.twistlock.com/wp-content/uploads/2015/12/Twistlock-Logo.png)
@@ -45,8 +45,8 @@ All requests and their associated authorization responses are logged to the stan
 ### Examples
 
 Below are some examples for basic policy scenarios:
- 1. Alice can run all Docker commands:                     `{"name":"policy_1","users":["alice"],"actions":["*"]}`
- 2. All users can run all Docker commands:                    `{"name":"policy_2","users":["*"],"actions":["*"]}`
+ 1. Alice can run all Docker commands:                     `{"name":"policy_1","users":["alice"],"actions":[""]}`
+ 2. All users can run all Docker commands:                    `{"name":"policy_2","users":[""],"actions":[""]}`
  3. Alice and Bob can create new containers:              `{"name":"policy_3","users":["alice","bob"],"actions":["container_create"]}`
  4. Service account can read logs and run container top:  `{"name":"policy_4","users":["service_account"],"actions":["container_logs","container_top"]}` 
  5. Alice can perform anything on containers: `{"name":"policy_5","users":["alice"],"actions":["container"]}` 

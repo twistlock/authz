@@ -44,7 +44,7 @@ func main() {
 		case authorizerBasic:
 			authZHandler = authz.NewBasicAuthZAuthorizer(&authz.BasicAuthorizerSettings{PolicyPath: c.GlobalString(policyFileFlag)})
 		default:
-			panic(fmt.Sprintf("Unkwon authz hander %q", c.GlobalString(authorizerFlag)))
+			panic(fmt.Sprintf("Unknown authz hander %q", c.GlobalString(authorizerFlag)))
 		}
 
 		switch c.GlobalString(auditorFlag) {

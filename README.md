@@ -88,7 +88,7 @@ The authorization plugin can run as a container application or as a host service
 ```
   add authz-plugin parameter to ExecStart parameter
 ```bash
-   ExecStart=/usr/bin/docker daemon -H fd:// --authz-plugin=authz-broker 
+   ExecStart=/usr/bin/docker daemon -H fd:// --authorization-plugin=authz-broker 
 ``` 
   
 # Dev environment

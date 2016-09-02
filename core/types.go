@@ -63,33 +63,33 @@ var (
 	ActionDockerCheckAuth = "docker_auth"
 	// ActionDockerEvents describes https://docs.docker.com/engine/reference/api/docker_remote_api_v1.24/#/monitor-docker-s-events
 	ActionDockerEvents = "docker_events"
-	// ActionDockerInfo describes https://docs.docker.com/engine/reference/api/docker_remote_api_v1.21/#display-system-wide-information
+	// ActionDockerInfo describes https://docs.docker.com/engine/reference/api/docker_remote_api_v1.24/#/display-system-wide-information
 	ActionDockerInfo = "docker_info"
-	// ActionDockerPing describes https://docs.docker.com/reference/api/docker_remote_api_v1.21/#ping-the-docker-server
+	// ActionDockerPing https://docs.docker.com/engine/reference/api/docker_remote_api_v1.24/#/ping-the-docker-server
 	ActionDockerPing = "docker_ping"
 	// ActionDockerVersion describes https://docs.docker.com/engine/reference/api/docker_remote_api_v1.24/#/show-the-docker-version-information
 	ActionDockerVersion = "docker_version"
-	// ActionImageArchive describes https://docs.docker.com/reference/api/docker_remote_api_v1.21/#get-a-tarball-containing-all-images
+	// ActionImageArchive describes https://docs.docker.com/engine/reference/api/docker_remote_api_v1.24/#/get-a-tarball-containing-all-images-in-a-repository
 	ActionImageArchive = "images_archive"
-	// ActionImageBuild describes https://docs.docker.com/reference/api/docker_remote_api_v1.21/#build-image-from-a-dockerfile
+	// ActionImageBuild describes https://docs.docker.com/engine/reference/api/docker_remote_api_v1.24/#/build-image-from-a-dockerfile
 	ActionImageBuild = "image_build"
-	// ActionImageCreate describes https://docs.docker.com/engine/reference/api/docker_remote_api_v1.21/#create-an-image
+	// ActionImageCreate describes https://docs.docker.com/engine/reference/api/docker_remote_api_v1.24/#/create-an-image
 	ActionImageCreate = "image_create"
-	// ActionImageDelete describes https://docs.docker.com/reference/api/docker_remote_api_v1.18/#inspect-an-image
+	// ActionImageDelete describes https://docs.docker.com/engine/reference/api/docker_remote_api_v1.24/#/remove-an-image
 	ActionImageDelete = "image_delete"
-	// ActionImageHistory describes https://docs.docker.com/reference/api/docker_remote_api_v1.21/#get-the-history-of-an-image
+	// ActionImageHistory describes https://docs.docker.com/engine/reference/api/docker_remote_api_v1.24/#/get-the-history-of-an-image
 	ActionImageHistory = "image_history"
-	// ActionImageInspect describes https://docs.docker.com/reference/api/docker_remote_api_v1.21/#inspect-an-image
+	// ActionImageInspect describes https://docs.docker.com/engine/reference/api/docker_remote_api_v1.24/#/inspect-an-image
 	ActionImageInspect = "image_inspect"
-	// ActionImageList describes https://docs.docker.com/reference/api/docker_remote_api_v1.21/#list-images
+	// ActionImageList describes https://docs.docker.com/engine/reference/api/docker_remote_api_v1.24/#/list-images
 	ActionImageList = "image_list"
-	// ActionImageLoad describes https://docs.docker.com/reference/api/docker_remote_api_v1.21/#load-a-tarball-with-a-set-of-images-and-tags-into-docker
+	// ActionImageLoad describes https://docs.docker.com/engine/reference/api/docker_remote_api_v1.24/#/load-a-tarball-with-a-set-of-images-and-tags-into-docker
 	ActionImageLoad = "images_load"
-	// ActionImagePush describes https://docs.docker.com/reference/api/docker_remote_api_v1.21/#push-an-image-on-the-registry
+	// ActionImagePush describes https://docs.docker.com/engine/reference/api/docker_remote_api_v1.24/#/push-an-image-on-the-registry
 	ActionImagePush = "image_push"
-	// ActionImagesSearch describes https://docs.docker.com/reference/api/docker_remote_api_v1.21/#search-images
+	// ActionImagesSearch describes https://docs.docker.com/engine/reference/api/docker_remote_api_v1.24/#/search-images
 	ActionImagesSearch = "images_search"
-	// ActionImageTag describes https://docs.docker.com/reference/api/docker_remote_api_v1.21/#tag-an-image-into-a-repository
+	// ActionImageTag dhttps://docs.docker.com/engine/reference/api/docker_remote_api_v1.24/#/tag-an-image-into-a-repository
 	ActionImageTag = "image_tag"
 	// ActionVolumeList describes  https://docs.docker.com/engine/reference/api/docker_remote_api_v1.24/#/list-volumes
 	ActionVolumeList = "volume_list"

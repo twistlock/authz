@@ -70,7 +70,7 @@ var routes = []route{
 	{pattern: "/containers/create", method: "POST", action: ActionContainerCreate},
 	// https://docs.docker.com/engine/reference/api/docker_remote_api_v1.24/#/update-a-container
 	{pattern: "/containers/.+/update", method: "POST", action: ActionContainerUpdate},
-	// https://docs.docker.com/reference/api/docker_remote_api_v1.21/#get-a-tarball-containing-all-images
+	// https://docs.docker.com/engine/reference/api/docker_remote_api_v1.24/#/get-a-tarball-containing-all-images-in-a-repository
 	{pattern: "/images/.+./get", method: "GET", action: ActionImageArchive},
 	// https://docs.docker.com/engine/reference/api/docker_remote_api_v1.24/#/search-images
 	{pattern: "/images/search", method: "GET", action: ActionImagesSearch},
@@ -92,9 +92,9 @@ var routes = []route{
 	{pattern: "/build", method: "POST", action: ActionImageBuild},
 	// https://docs.docker.com/engine/reference/api/docker_remote_api_v1.24/#/list-images
 	{pattern: "/images/json", method: "GET", action: ActionImageList},
-	// https://docs.docker.com/reference/api/docker_remote_api_v1.21/#ping-the-docker-server
+	// https://docs.docker.com/engine/reference/api/docker_remote_api_v1.24/#/ping-the-docker-server
 	{pattern: "/_ping", method: "GET", action: ActionDockerPing},
-	// https://docs.docker.com/reference/api/docker_remote_api_v1.21/#display-system-wide-information
+	// https://docs.docker.com/engine/reference/api/docker_remote_api_v1.24/#/display-system-wide-information
 	{pattern: "/info", method: "GET", action: ActionDockerInfo},
 	// https://docs.docker.com/engine/reference/api/docker_remote_api_v1.24/#/exec-inspect
 	{pattern: "/exec/.+/json", method: "GET", action: ActionContainerExecInspect},

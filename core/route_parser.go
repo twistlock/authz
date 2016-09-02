@@ -96,17 +96,19 @@ var routes = []route{
 	{pattern: "/_ping", method: "GET", action: ActionDockerPing},
 	// https://docs.docker.com/reference/api/docker_remote_api_v1.21/#display-system-wide-information
 	{pattern: "/info", method: "GET", action: ActionDockerInfo},
-	// https://docs.docker.com/reference/api/docker_remote_api_v1.21/#exec-inspect
+	// https://docs.docker.com/engine/reference/api/docker_remote_api_v1.24/#/exec-inspect
 	{pattern: "/exec/.+/json", method: "GET", action: ActionContainerExecInspect},
-	// https://docs.docker.com/reference/api/docker_remote_api_v1.21/#exec-start
+	// https://docs.docker.com/engine/reference/api/docker_remote_api_v1.24/#/exec-start
 	{pattern: "/exec/.+/start", method: "POST", action: ActionContainerExecStart},
+	// https://docs.docker.com/engine/reference/api/docker_remote_api_v1.24/#/exec-resize
+	{pattern: "/exec/.+/resize", method: "POST", action: ActionContainerExecResize},
 	// https://docs.docker.com/engine/reference/api/docker_remote_api_v1.21/#inspect-a-volume
 	{pattern: "/volumes/.+", method: "GET", action: ActionVolumeInspect},
-	// https://docs.docker.com/engine/reference/api/docker_remote_api_v1.21/#list-volumes
+	// https://docs.docker.com/engine/reference/api/docker_remote_api_v1.24/#/list-volumes
 	{pattern: "/volumes", method: "GET", action: ActionVolumeList},
-	// https://docs.docker.com/engine/reference/api/docker_remote_api_v1.21/#create-a-volume
+	// https://docs.docker.com/engine/reference/api/docker_remote_api_v1.24/#/create-a-volume
 	{pattern: "/volumes/create", method: "POST", action: ActionVolumeCreate},
-	// https://docs.docker.com/engine/reference/api/docker_remote_api_v1.21/#remove-a-volume
+	// https://docs.docker.com/engine/reference/api/docker_remote_api_v1.24/#/remove-a-volume
 	{pattern: "/volumes/.+", method: "DELETE", action: ActionVolumeRemove},
 	// https://docs.docker.com/engine/reference/api/docker_remote_api_v1.21/#inspect-network
 	{pattern: "/networks/.+", method: "GET", action: ActionNetworkInspect},

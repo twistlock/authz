@@ -27,6 +27,7 @@ func TestRouteParser(t *testing.T) {
 		{"GET", "/v1.24/containers/id/archive", ActionContainerArchive},
 		{"GET", "/v1.24/exec/id/json", ActionContainerExecInspect},
 		{"POST", "/v1.24/exec/id/start", ActionContainerExecStart},
+		{"POST", "/v1.24/exec/id/resize", ActionContainerExecResize},
 		{"HEAD", "/v1.24/containers/id/archive", ActionContainerArchiveInfo},
 		{"PUT", "/v1.24/containers/id/archive", ActionContainerArchiveExtract},
 		{"GET", "/v1.24/containers/id/export", ActionContainerExport},

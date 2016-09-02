@@ -23,10 +23,12 @@ var (
 	ActionContainerUpdate = "container_update"
 	// ActionContainerExecCreate describes https://docs.docker.com/engine/reference/api/docker_remote_api_v1.24/#/exec-create
 	ActionContainerExecCreate = "container_exec_create"
-	// ActionContainerExecInspect describes https://docs.docker.com/reference/api/docker_remote_api_v1.21/#exec-inspect
+	// ActionContainerExecInspect describes https://docs.docker.com/engine/reference/api/docker_remote_api_v1.24/#/exec-inspect
 	ActionContainerExecInspect = "container_exec_inspect"
-	// ActionContainerExecStart describes https://docs.docker.com/reference/api/docker_remote_api_v1.21/#exec-start
+	// ActionContainerExecStart describes https://docs.docker.com/engine/reference/api/docker_remote_api_v1.24/#/exec-start
 	ActionContainerExecStart = "container_exec_start"
+	// ActionContainerExecResize describes https://docs.docker.com/engine/reference/api/docker_remote_api_v1.24/#/exec-resize
+	ActionContainerExecResize = "container_exec_resize"
 	// ActionContainerExport describes https://docs.docker.com/engine/reference/api/docker_remote_api_v1.24/#/export-a-container
 	ActionContainerExport = "container_export"
 	// ActionContainerInspect describes https://docs.docker.com/engine/reference/api/docker_remote_api_v1.24/#/inspect-a-container

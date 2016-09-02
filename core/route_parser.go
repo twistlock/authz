@@ -102,7 +102,7 @@ var routes = []route{
 	{pattern: "/exec/.+/start", method: "POST", action: ActionContainerExecStart},
 	// https://docs.docker.com/engine/reference/api/docker_remote_api_v1.24/#/exec-resize
 	{pattern: "/exec/.+/resize", method: "POST", action: ActionContainerExecResize},
-	// https://docs.docker.com/engine/reference/api/docker_remote_api_v1.21/#inspect-a-volume
+	// https://docs.docker.com/engine/reference/api/docker_remote_api_v1.24/#/inspect-a-volume
 	{pattern: "/volumes/.+", method: "GET", action: ActionVolumeInspect},
 	// https://docs.docker.com/engine/reference/api/docker_remote_api_v1.24/#/list-volumes
 	{pattern: "/volumes", method: "GET", action: ActionVolumeList},
@@ -110,17 +110,17 @@ var routes = []route{
 	{pattern: "/volumes/create", method: "POST", action: ActionVolumeCreate},
 	// https://docs.docker.com/engine/reference/api/docker_remote_api_v1.24/#/remove-a-volume
 	{pattern: "/volumes/.+", method: "DELETE", action: ActionVolumeRemove},
-	// https://docs.docker.com/engine/reference/api/docker_remote_api_v1.21/#inspect-network
+	// https://docs.docker.com/engine/reference/api/docker_remote_api_v1.24/#/inspect-network
 	{pattern: "/networks/.+", method: "GET", action: ActionNetworkInspect},
-	// https://docs.docker.com/engine/reference/api/docker_remote_api_v1.21/#list-networks
+	// https://docs.docker.com/engine/reference/api/docker_remote_api_v1.24/#/list-networks
 	{pattern: "/networks", method: "GET", action: ActionNetworkList},
-	// https://docs.docker.com/engine/reference/api/docker_remote_api_v1.21/#create-a-network
+	// https://docs.docker.com/engine/reference/api/docker_remote_api_v1.24/#/create-a-network
 	{pattern: "/networks/create", method: "POST", action: ActionNetworkCreate},
-	// https://docs.docker.com/engine/reference/api/docker_remote_api_v1.21/#connect-a-container-to-a-network
+	// https://docs.docker.com/engine/reference/api/docker_remote_api_v1.24/#/connect-a-container-to-a-network
 	{pattern: "/networks/.+/connect", method: "POST", action: ActionNetworkConnect},
-	// https://docs.docker.com/engine/reference/api/docker_remote_api_v1.21/#disconnect-a-container-from-a-network
+	// https://docs.docker.com/engine/reference/api/docker_remote_api_v1.24/#/disconnect-a-container-from-a-network
 	{pattern: "/networks/.+/disconnect", method: "POST", action: ActionNetworkDisconnect},
-	// https://docs.docker.com/engine/reference/api/docker_remote_api_v1.21/#remove-a-network
+	// https://docs.docker.com/engine/reference/api/docker_remote_api_v1.24/#/remove-a-network
 	{pattern: "/networks/.+", method: "DELETE", action: ActionNetworkRemove},
 }
 

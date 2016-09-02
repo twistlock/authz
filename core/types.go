@@ -91,26 +91,25 @@ var (
 	ActionImagesSearch = "images_search"
 	// ActionImageTag describes https://docs.docker.com/reference/api/docker_remote_api_v1.21/#tag-an-image-into-a-repository
 	ActionImageTag = "image_tag"
-	// ActionVolumeList describes  https://docs.docker.com/engine/reference/api/docker_remote_api_v1.21/#list-volumes
+	// ActionVolumeList describes  https://docs.docker.com/engine/reference/api/docker_remote_api_v1.24/#/list-volumes
 	ActionVolumeList = "volume_list"
-	// ActionVolumeCreate describes https://docs.docker.com/engine/reference/api/docker_remote_api_v1.21/#create-a-volume
+	// ActionVolumeCreate describes https://docs.docker.com/engine/reference/api/docker_remote_api_v1.24/#/create-a-volume
 	ActionVolumeCreate = "volume_create"
-	// ActionVolumeInspect describes https://docs.docker.com/engine/reference/api/docker_remote_api_v1.21/#inspect-a-volume
+	// ActionVolumeInspect describes https://docs.docker.com/engine/reference/api/docker_remote_api_v1.24/#/inspect-a-volume
 	ActionVolumeInspect = "volume_inspect"
-	// ActionVolumeRemove describes https://docs.docker.com/engine/reference/api/docker_remote_api_v1.21/#remove-a-volume
+	// ActionVolumeRemove describes https://docs.docker.com/engine/reference/api/docker_remote_api_v1.24/#/remove-a-volume
 	ActionVolumeRemove = "volume_remove"
-	// ActionNetworkList describes https://docs.docker.com/engine/reference/api/docker_remote_api_v1.21/#list-networks
+	// ActionNetworkList describes https://docs.docker.com/engine/reference/api/docker_remote_api_v1.24/#/list-networks
 	ActionNetworkList = "network_list"
-	// ActionNetworkInspect describes https://docs.docker.com/engine/reference/api/docker_remote_api_v1.21/#inspect-network
+	// ActionNetworkInspect describes https://docs.docker.com/engine/reference/api/docker_remote_api_v1.24/#/inspect-network
 	ActionNetworkInspect = "network_inspect"
-	// ActionNetworkCreate describes https://docs.docker.com/engine/reference/api/docker_remote_api_v1.21/#create-a-network
+	// ActionNetworkCreate describes https://docs.docker.com/engine/reference/api/docker_remote_api_v1.24/#/create-a-network
 	ActionNetworkCreate = "network_create"
-	// ActionNetworkConnect describes
-	// https://docs.docker.com/engine/reference/api/docker_remote_api_v1.21/#connect-a-container-to-a-network
+	// ActionNetworkConnect describes https://docs.docker.com/engine/reference/api/docker_remote_api_v1.24/#/connect-a-container-to-a-network
 	ActionNetworkConnect = "network_connect"
-	// ActionNetworkDisconnect describes https://docs.docker.com/engine/reference/api/docker_remote_api_v1.21/#disconnect-a-container-from-a-network
+	// ActionNetworkDisconnect describes https://docs.docker.com/engine/reference/api/docker_remote_api_v1.24/#/disconnect-a-container-from-a-network
 	ActionNetworkDisconnect = "network_disconnect"
-	// ActionNetworkRemove describes https://docs.docker.com/engine/reference/api/docker_remote_api_v1.21/#remove-a-network
+	// ActionNetworkRemove describes https://docs.docker.com/engine/reference/api/docker_remote_api_v1.24/#/remove-a-network
 	ActionNetworkRemove = "network_remove"
 	// ActionNone indicates no action matched the given method URL combination
 	ActionNone = ""

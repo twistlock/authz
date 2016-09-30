@@ -44,14 +44,14 @@ func main() {
 		case authorizerBasic:
 			authZHandler = authz.NewBasicAuthZAuthorizer(&authz.BasicAuthorizerSettings{PolicyPath: c.GlobalString(policyFileFlag)})
 		default:
-			panic(fmt.Sprintf("Unknown authz hander %q", c.GlobalString(authorizerFlag)))
+			panic(fmt.Sprintf("Unknown authz handler %q", c.GlobalString(authorizerFlag)))
 		}
 
 		switch c.GlobalString(auditorFlag) {
 		case auditorBasic:
 			auditor = authz.NewBasicAuditor(&authz.BasicAuditorSettings{LogHook: c.GlobalString(auditorHookFlag)})
 		default:
-			panic(fmt.Sprintf("Unkwon authz hander %q", c.GlobalString(authorizerFlag)))
+			panic(fmt.Sprintf("Unknown authz handler %q", c.GlobalString(authorizerFlag)))
 		}
 
 		srv := core.NewAuthZSrv(authZHandler, auditor)

@@ -3,11 +3,12 @@ package main
 
 import (
 	"fmt"
-	"github.com/codegangsta/cli"
+	"os"
+
 	"github.com/Sirupsen/logrus"
+	"github.com/codegangsta/cli"
 	"github.com/twistlock/authz/authz"
 	"github.com/twistlock/authz/core"
-	"os"
 )
 
 const (
@@ -19,11 +20,13 @@ const (
 )
 
 const (
-	authorizerBasic = "basic"
+	authorizerBasic  = "basic"
+	authorizerHeader = "header"
 )
 
 const (
-	auditorBasic = "basic"
+	auditorBasic  = "basic"
+	auditorHeader = "header"
 )
 
 func main() {
@@ -43,6 +46,8 @@ func main() {
 		switch c.GlobalString(authorizerFlag) {
 		case authorizerBasic:
 			authZHandler = authz.NewBasicAuthZAuthorizer(&authz.BasicAuthorizerSettings{PolicyPath: c.GlobalString(policyFileFlag)})
+		case authorizerHeader:
+			authZHandler = authz.NewHeaderAuthZAuthorizer()
 		default:
 			panic(fmt.Sprintf("Unknown authz handler %q", c.GlobalString(authorizerFlag)))
 		}
@@ -50,6 +55,8 @@ func main() {
 		switch c.GlobalString(auditorFlag) {
 		case auditorBasic:
 			auditor = authz.NewBasicAuditor(&authz.BasicAuditorSettings{LogHook: c.GlobalString(auditorHookFlag)})
+		case auditorHeader:
+			auditor = authz.NewHeaderAuditor(&authz.HeaderAuditorSettings{LogHook: c.GlobalString(auditorHookFlag)})
 		default:
 			panic(fmt.Sprintf("Unknown authz handler %q", c.GlobalString(authorizerFlag)))
 		}

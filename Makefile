@@ -30,3 +30,4 @@ test:  binary
 
 clean:
 	rm authz_broker
+

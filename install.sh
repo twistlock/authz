@@ -1,4 +1,3 @@
-#
 #!/usr/bin/env bash
 
 name=twistlock_authz_broker

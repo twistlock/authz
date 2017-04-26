@@ -6,7 +6,7 @@
 
 
  
-A basic extendable Docker [authorization plugin] (https://github.com/docker/docker/blob/master/docs/extend/authorization.md) that runs directly on the host or inside a container. The framework depends on [docker authentication plugin support] (https://github.com/docker/docker/pull/18514). Basic authorization is provided when Docker daemon is started with `--tlsverify` flag (username is extracted from the certificate common name).
+A basic extendable Docker [authorization plugin] (https://github.com/docker/docker/blob/master/docs/extend/plugins_authorization.md) that runs directly on the host or inside a container. The framework depends on [docker authentication plugin support] (https://github.com/docker/docker/pull/18514). Basic authorization is provided when Docker daemon is started with `--tlsverify` flag (username is extracted from the certificate common name).
 Provided by [Twistlock] (https://www.twistlock.com).
 
 ![Twistlock Logo](https://www.twistlock.com/wp-content/uploads/2015/12/Twistlock-Logo.png)
@@ -52,6 +52,22 @@ Below are some examples for basic policy scenarios:
  5. Alice can perform anything on containers: `{"name":"policy_5","users":["alice"],"actions":["container"]}` 
  6. Alice can only perform get operations on containers:  `{"name":"policy_5","users":["alice"],"actions":["container"], "readonly":true }` 
 
+# Dev environment
+  
+## Setting up local dev environment
+
+  * Install [go 1.8](https://golang.org/dl/) and [docker](https://docs.docker.com/linux/step_one/).
+  * Install [godep](https://github.com/tools/godep).
+  * Clone the project.
+  * Restore go dependencies:
+```go
+  $ godep restore
+```
+  * Build the binary and image:
+```go
+  $ make all
+```
+
 ## Installing the plugin
 
 The authorization plugin can run as a container application or as a host service.
@@ -89,22 +105,6 @@ The authorization plugin can run as a container application or as a host service
   add authz-plugin parameter to ExecStart parameter
 ```bash
    ExecStart=/usr/bin/docker daemon -H fd:// --authorization-plugin=authz-broker
-``` 
-  
-# Dev environment
-  
-## Setting up local dev environment
-
-  * Install [go 1.5](https://golang.org/dl/) and [docker](https://docs.docker.com/linux/step_one/).
-  * Install [godep](https://github.com/tools/godep).
-  * Clone the project.
-  * Restore go dependencies:
-```go
-  $ godep restore
-```
-  * Build the binary and image:
-```go
-  $ make all
 ```
 
 ## Extending the authorization plugin

@@ -6,8 +6,8 @@
 
 
  
-A basic extendable Docker [authorization plugin] (https://github.com/docker/docker/blob/master/docs/extend/plugins_authorization.md) that runs directly on the host or inside a container. The framework depends on [docker authentication plugin support] (https://github.com/docker/docker/pull/18514). Basic authorization is provided when Docker daemon is started with `--tlsverify` flag (username is extracted from the certificate common name).
-Provided by [Twistlock] (https://www.twistlock.com).
+A basic extendable Docker [authorization plugin](https://github.com/docker/docker/blob/master/docs/extend/plugins_authorization.md) that runs directly on the host or inside a container. The framework depends on [docker authentication plugin support](https://github.com/docker/docker/pull/18514). Basic authorization is provided when Docker daemon is started with `--tlsverify` flag (username is extracted from the certificate common name).
+Provided by [Twistlock](https://www.twistlock.com).
 
 ![Twistlock Logo](https://www.twistlock.com/wp-content/uploads/2015/12/Twistlock-Logo.png)
 
@@ -39,8 +39,8 @@ type BasicPolicy struct {
 For basic authorization flows, all policies reside in a single policy file under `/var/lib/authz-broker/policy.json`. The file  is continuously monitored and no restart is required upon changes.
 The file format is [one policy JSON object per line](http://jsonlines.org/).  There should be no enclosing list or map, just one map per line.
 
-The conversation between [Docker remote API] (https://docs.docker.com/engine/reference/api/docker_remote_api_v1.21/) (the URI and method that are passed Docker daemon to AuthZ plugin) to internal action parameters is defined by the [route parser] (https://github.com/twistlock/authz/blob/master/core/route_parser.go).
-All requests and their associated authorization responses are logged to the standard output. Additional hooks such as syslog and log file is also available. To add additional [logrus hooks] (https://github.com/Sirupsen/logrus#hooks), see [extending the authorization plugin].
+The conversation between [Docker remote API](https://docs.docker.com/engine/reference/api/docker_remote_api_v1.21/) (the URI and method that are passed Docker daemon to AuthZ plugin) to internal action parameters is defined by the [route parser](https://github.com/twistlock/authz/blob/master/core/route_parser.go).
+All requests and their associated authorization responses are logged to the standard output. Additional hooks such as syslog and log file is also available. To add additional [logrus hooks](https://github.com/Sirupsen/logrus#hooks), see [extending the authorization plugin].
 
 ### Examples
 
@@ -136,4 +136,6 @@ type Auditor interface {
 
 ## Licensing
 
-Twistlock authorization plugin is licensed under the Apache License, Version 2.0. See [LICENSE](https://github.com/twistlock/authz/blob/master/LICENSE) for the full license text.
+Twistlock authorization plugin is licensed under the Apache License, Version 2.0.
+
+See [LICENSE](https://github.com/twistlock/authz/blob/master/LICENSE) for the full license text.

@@ -11,7 +11,8 @@ type route struct {
 }
 
 var routes = []route{
-
+	// https://docs.docker.com/reference/api/docker_remote_api_v1.21/#build-image-from-a-dockerfile
+	{pattern: "/build", method: "POST", action: ActionImageBuild},
 	// https://docs.docker.com/reference/api/docker_remote_api_v1.20/#create-a-new-image-from-a-container-s-changes
 	{pattern: "/commit", method: "POST", action: ActionContainerCommit},
 	// https://docs.docker.com/reference/api/docker_remote_api_v1.20/#monitor-docker-s-events
@@ -87,8 +88,6 @@ var routes = []route{
 	{pattern: "/images/create", method: "POST", action: ActionImageCreate},
 	// https://docs.docker.com/reference/api/docker_remote_api_v1.21/#load-a-tarball-with-a-set-of-images-and-tags-into-docker
 	{pattern: "/images/load", method: "POST", action: ActionImageLoad},
-	// https://docs.docker.com/reference/api/docker_remote_api_v1.21/#build-image-from-a-dockerfile
-	{pattern: "/images/build", method: "POST", action: ActionImageBuild},
 	// https://docs.docker.com/reference/api/docker_remote_api_v1.21/#list-images
 	{pattern: "/images/json", method: "GET", action: ActionImageList},
 	// https://docs.docker.com/reference/api/docker_remote_api_v1.21/#ping-the-docker-server

@@ -3,11 +3,12 @@ package main
 
 import (
 	"fmt"
+	"os"
+
 	"github.com/Sirupsen/logrus"
 	"github.com/codegangsta/cli"
 	"github.com/twistlock/authz/authz"
 	"github.com/twistlock/authz/core"
-	"os"
 )
 
 const (
@@ -20,10 +21,11 @@ const (
 
 const (
 	authorizerBasic = "basic"
+	auditorBasic    = "basic"
 )
 
-const (
-	auditorBasic = "basic"
+var (
+	version = "v1.0.0"
 )
 
 func main() {
@@ -31,7 +33,7 @@ func main() {
 	app := cli.NewApp()
 	app.Name = "twistlock-authz"
 	app.Usage = "Authorization plugin for docker"
-	app.Version = "1.0"
+	app.Version = version
 
 	app.Action = func(c *cli.Context) {
 

@@ -1,4 +1,6 @@
 # AuthZ plugin generated files to ignore
+bin/
+release/
 *.orig
 *.test
 .*.swp

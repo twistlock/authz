@@ -9,7 +9,7 @@
 A basic extendable Docker [authorization plugin](https://docs.docker.com/engine/extend/plugins_authorization/) that runs directly on the host or inside a container. The framework depends on [docker authentication plugin support](https://github.com/docker/docker/pull/18514). Basic authorization is provided when Docker daemon is started with `--tlsverify` flag (username is extracted from the certificate common name).
 Provided by [Twistlock](https://www.twistlock.com).
 
-![Twistlock Logo](https://www.twistlock.com/wp-content/uploads/2015/12/Twistlock-Logo.png)
+![Twistlock Logo](http://www.twistlock.com/wp-content/uploads/2017/11/Twistlock_Logo-Lockup_RGB.png)
 
 ## Basic policy enforcement 
 

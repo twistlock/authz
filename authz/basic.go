@@ -10,6 +10,8 @@ import (
 	"github.com/twistlock/authz/core"
 	"io/ioutil"
 	"log/syslog"
+	"net/http"
+	"net/url"
 	"os"
 	"path"
 	"regexp"
@@ -147,9 +149,14 @@ func (f *basicAuthorizer) loadPolicies() error {
 func (f *basicAuthorizer) AuthZReq(authZReq *authorization.Request) *authorization.Response {
 
 	logrus.Debugf("Received AuthZ request, method: '%s', url: '%s'", authZReq.RequestMethod, authZReq.RequestURI)
-
-	action := core.ParseRoute(authZReq.RequestMethod, authZReq.RequestURI)
-
+	url, err := url.Parse(authZReq.RequestURI)
+	if err != nil {
+		return &authorization.Response{
+			Allow: false,
+			Msg:   fmt.Sprintf("invalid request URI: %s", err.Error()),
+		}
+	}
+	action := core.ParseRoute(authZReq.RequestMethod, url.Path)
 	for _, policy := range f.policies {
 		for _, user := range policy.Users {
 			if user == authZReq.User {
@@ -160,8 +167,7 @@ func (f *basicAuthorizer) AuthZReq(authZReq *authorization.Request) *authorizati
 					}
 
 					if match {
-
-						if policy.Readonly && authZReq.RequestMethod != "GET" {
+						if policy.Readonly && authZReq.RequestMethod != http.MethodGet {
 							return &authorization.Response{
 								Allow: false,
 								Msg:   fmt.Sprintf("action '%s' not allowed for user '%s' by readonly policy '%s'", action, authZReq.User, policy.Name),

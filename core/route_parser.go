@@ -122,7 +122,6 @@ var routes = []route{
 
 // ParseRoute convert a method/url pattern to corresponding docker action
 func ParseRoute(method, url string) string {
-
 	for _, route := range routes {
 		if route.method == method {
 			match, err := regexp.MatchString(route.pattern, url)

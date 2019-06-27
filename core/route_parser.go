@@ -90,6 +90,8 @@ var routes = []route{
 	{pattern: "/images/load", method: "POST", action: ActionImageLoad},
 	// https://docs.docker.com/reference/api/docker_remote_api_v1.21/#list-images
 	{pattern: "/images/json", method: "GET", action: ActionImageList},
+	// https://docs.docker.com/engine/api/v1.37/#operation/ImagePrune
+	{pattern: "/images/prune", method: "POST", action: ActionImagePrune},
 	// https://docs.docker.com/reference/api/docker_remote_api_v1.21/#ping-the-docker-server
 	{pattern: "/_ping", method: "GET", action: ActionDockerPing},
 	// https://docs.docker.com/reference/api/docker_remote_api_v1.21/#display-system-wide-information

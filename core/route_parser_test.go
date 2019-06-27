@@ -50,6 +50,7 @@ func TestRouteParser(t *testing.T) {
 		{"POST", "/v1.21/images/build", ActionImageBuild},
 		{"GET", "/v1.21/images/id/json", ActionImageInspect},
 		{"DELETE", "/v1.21/images/id", ActionImageDelete},
+		{"POST", "/v1.37/images/prune", ActionImagePrune},
 		{"GET", "/v1.21/_ping", ActionDockerPing},
 		{"GET", "/v1.21/info", ActionDockerInfo},
 		{"GET", "/v1.21/images/search", ActionImagesSearch},

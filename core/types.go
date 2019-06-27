@@ -83,6 +83,8 @@ var (
 	ActionImageList = "image_list"
 	// ActionImageLoad describes https://docs.docker.com/reference/api/docker_remote_api_v1.21/#load-a-tarball-with-a-set-of-images-and-tags-into-docker
 	ActionImageLoad = "images_load"
+	// ActionImagePrune describes https://docs.docker.com/engine/api/v1.37/#operation/ImagePrune
+	ActionImagePrune = "image_prune"
 	// ActionImagePush describes https://docs.docker.com/reference/api/docker_remote_api_v1.21/#push-an-image-on-the-registry
 	ActionImagePush = "image_push"
 	// ActionImagesSearch describes https://docs.docker.com/reference/api/docker_remote_api_v1.21/#search-images

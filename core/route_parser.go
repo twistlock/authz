@@ -120,6 +120,64 @@ var routes = []route{
 	{pattern: "/networks/.+/disconnect", method: "POST", action: ActionNetworkDisconnect},
 	// https://docs.docker.com/engine/reference/api/docker_remote_api_v1.21/#remove-a-network
 	{pattern: "/networks/.+", method: "DELETE", action: ActionNetworkRemove},
+	// https://docs.docker.com/engine/api/v1.37/#operation/SwarmInit
+	{pattern: "/swarm/init", method: "POST", action: ActionSwarmInit},
+	// https://docs.docker.com/engine/api/v1.37/#operation/SwarmJoin
+	{pattern: "/swarm/join", method: "POST", action: ActionSwarmJoin},
+	// https://docs.docker.com/engine/api/v1.37/#operation/SwarmLeave
+	{pattern: "/swarm/leave", method: "POST", action: ActionSwarmLeave},
+	// https://docs.docker.com/engine/api/v1.37/#operation/SwarmUpdate
+	{pattern: "/swarm/update", method: "POST", action: ActionSwarmUpdate},
+	// https://docs.docker.com/engine/api/v1.37/#operation/SwarmUnlockkey
+	{pattern: "/swarm/unlockkey", method: "GET", action: ActionSwarmUnlockKey},
+	// https://docs.docker.com/engine/api/v1.37/#operation/SwarmUnlock
+	{pattern: "/swarm/unlock", method: "POST", action: ActionSwarmUnlock},
+	// https://docs.docker.com/engine/api/v1.37/#operation/SwarmInspect
+	{pattern: "/swarm", method: "GET", action: ActionSwarmInspect},
+	// https://docs.docker.com/engine/api/v1.39/#operation/NodeUpdate
+	{pattern: "/nodes/.+/update", method: "POST", action: ActionNodeUpdate},
+	// https://docs.docker.com/engine/api/v1.39/#operation/NodeInspect
+	{pattern: "/nodes/.+", method: "GET", action: ActionNodeInspect},
+	// https://docs.docker.com/engine/api/v1.39/#operation/NodeDelete
+	{pattern: "/nodes/.+", method: "DELETE", action: ActionNodeDelete},
+	// https://docs.docker.com/engine/api/v1.39/#operation/NodeList
+	{pattern: "/nodes", method: "GET", action: ActionNodeList},
+	// https://docs.docker.com/engine/api/v1.39/#operation/ServiceCreate
+	{pattern: "/services/create", method: "POST", action: ActionServiceCreate},
+	// https://docs.docker.com/engine/api/v1.39/#operation/ServiceUpdate
+	{pattern: "/services/.+/update", method: "POST", action: ActionServiceUpdate},
+	// https://docs.docker.com/engine/api/v1.39/#operation/ServiceLogs
+	{pattern: "/services/.+/logs", method: "GET", action: ActionServiceLogs},
+	// https://docs.docker.com/engine/api/v1.39/#operation/ServiceInspect
+	{pattern: "/services/.+", method: "GET", action: ActionServiceInspect},
+	// https://docs.docker.com/engine/api/v1.39/#operation/ServiceDelete
+	{pattern: "/services/.+", method: "DELETE", action: ActionServiceDelete},
+	// https://docs.docker.com/engine/api/v1.39/#operation/ServiceList
+	{pattern: "/services", method: "GET", action: ActionServiceList},
+	// https://docs.docker.com/engine/api/v1.39/#operation/TaskInspect
+	{pattern: "/tasks/.+", method: "GET", action: ActionTaskInspect},
+	// https://docs.docker.com/engine/api/v1.39/#operation/TaskList
+	{pattern: "/tasks", method: "GET", action: ActionTaskList},
+	// https://docs.docker.com/engine/api/v1.39/#operation/SecretCreate
+	{pattern: "/secrets/create", method: "POST", action: ActionSecretCreate},
+	// https://docs.docker.com/engine/api/v1.39/#operation/SecretUpdate
+	{pattern: "/secrets/.+/update", method: "POST", action: ActionSecretUpdate},
+	// https://docs.docker.com/engine/api/v1.39/#operation/SecretInspect
+	{pattern: "/secrets/.+", method: "GET", action: ActionSecretInspect},
+	// https://docs.docker.com/engine/api/v1.39/#operation/SecretDelete
+	{pattern: "/secrets/.+", method: "DELETE", action: ActionSecretDelete},
+	// https://docs.docker.com/engine/api/v1.39/#operation/SecretList
+	{pattern: "/secrets", method: "GET", action: ActionSecretList},
+	// https://docs.docker.com/engine/api/v1.39/#operation/ConfigCreate
+	{pattern: "/configs/create", method: "POST", action: ActionConfigCreate},
+	// https://docs.docker.com/engine/api/v1.39/#operation/ConfigUpdate
+	{pattern: "/configs/.+/update", method: "POST", action: ActionConfigUpdate},
+	// https://docs.docker.com/engine/api/v1.39/#operation/ConfigInspect
+	{pattern: "/configs/.+", method: "GET", action: ActionConfigInspect},
+	// https://docs.docker.com/engine/api/v1.39/#operation/ConfigDelete
+	{pattern: "/configs/.+", method: "DELETE", action: ActionConfigDelete},
+	// https://docs.docker.com/engine/api/v1.39/#operation/ConfigList
+	{pattern: "/configs", method: "GET", action: ActionConfigList},
 }
 
 // ParseRoute convert a method/url pattern to corresponding docker action

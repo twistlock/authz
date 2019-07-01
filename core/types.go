@@ -112,6 +112,64 @@ var (
 	ActionNetworkDisconnect = "network_disconnect"
 	// ActionNetworkRemove describes https://docs.docker.com/engine/reference/api/docker_remote_api_v1.21/#remove-a-network
 	ActionNetworkRemove = "network_remove"
+	// ActionSwarmInspect describes https://docs.docker.com/engine/api/v1.37/#operation/SwarmInspect
+	ActionSwarmInspect = "swarm_inspect"
+	// ActionSwarmInit describes https://docs.docker.com/engine/api/v1.37/#operation/SwarmInit
+	ActionSwarmInit = "swarm_init"
+	// ActionSwarmJoin describes https://docs.docker.com/engine/api/v1.37/#operation/SwarmJoin
+	ActionSwarmJoin = "swarm_join"
+	// ActionSwarmLeave describes https://docs.docker.com/engine/api/v1.37/#operation/SwarmLeave
+	ActionSwarmLeave = "swarm_leave"
+	// ActionSwarmUpdate describes https://docs.docker.com/engine/api/v1.37/#operation/SwarmUpdate
+	ActionSwarmUpdate = "swarm_update"
+	// ActionSwarmUnlockKey describes https://docs.docker.com/engine/api/v1.37/#operation/SwarmUnlockkey
+	ActionSwarmUnlockKey = "swarm_unlock_key"
+	// ActionSwarmUnlock describes https://docs.docker.com/engine/api/v1.37/#operation/SwarmUnlock
+	ActionSwarmUnlock = "swarm_unlock"
+	// ActionNodeList describes https://docs.docker.com/engine/api/v1.39/#operation/NodeList
+	ActionNodeList = "node_list"
+	// ActionNodeInspect describes https://docs.docker.com/engine/api/v1.39/#operation/NodeInspect
+	ActionNodeInspect = "node_inspect"
+	// ActionNodeDelete describes https://docs.docker.com/engine/api/v1.39/#operation/NodeDelete
+	ActionNodeDelete = "node_delete"
+	// ActionNodeUpdate describes https://docs.docker.com/engine/api/v1.39/#operation/NodeUpdate
+	ActionNodeUpdate = "node_update"
+	// ActionServiceList describes https://docs.docker.com/engine/api/v1.39/#operation/ServiceList
+	ActionServiceList = "service_list"
+	// ActionServiceCreate describes https://docs.docker.com/engine/api/v1.39/#operation/ServiceCreate
+	ActionServiceCreate = "service_create"
+	// ActionServiceInspect describes https://docs.docker.com/engine/api/v1.39/#operation/ServiceInspect
+	ActionServiceInspect = "service_inspect"
+	// ActionServiceDelete describes https://docs.docker.com/engine/api/v1.39/#operation/ServiceDelete
+	ActionServiceDelete = "service_delete"
+	// ActionServiceUpdate describes https://docs.docker.com/engine/api/v1.39/#operation/ServiceUpdate
+	ActionServiceUpdate = "service_update"
+	// ActionServiceLogs describes https://docs.docker.com/engine/api/v1.39/#operation/ServiceLogs
+	ActionServiceLogs = "service_logs"
+	// ActionTaskList describes https://docs.docker.com/engine/api/v1.39/#operation/TaskList
+	ActionTaskList = "task_list"
+	// ActionTaskInspect describes https://docs.docker.com/engine/api/v1.39/#operation/TaskInspect
+	ActionTaskInspect = "task_inspect"
+	// ActionSecretList describes https://docs.docker.com/engine/api/v1.39/#operation/SecretList
+	ActionSecretList = "secret_list"
+	// ActionSecretCreate describes https://docs.docker.com/engine/api/v1.39/#operation/SecretCreate
+	ActionSecretCreate = "secret_create"
+	// ActionSecretInspect describes https://docs.docker.com/engine/api/v1.39/#operation/SecretInspect
+	ActionSecretInspect = "secret_inspect"
+	// ActionSecretDelete describes https://docs.docker.com/engine/api/v1.39/#operation/SecretDelete
+	ActionSecretDelete = "secret_delete"
+	// ActionSecretUpdate describes https://docs.docker.com/engine/api/v1.39/#operation/SecretUpdate
+	ActionSecretUpdate = "secret_update"
+	// ActionConfigList describes https://docs.docker.com/engine/api/v1.39/#operation/ConfigList
+	ActionConfigList = "config_list"
+	// ActionConfigCreate describes https://docs.docker.com/engine/api/v1.39/#operation/ConfigCreate
+	ActionConfigCreate = "config_create"
+	// ActionConfigInspect describes https://docs.docker.com/engine/api/v1.39/#operation/ConfigInspect
+	ActionConfigInspect = "config_inspect"
+	// ActionConfigDelete describes https://docs.docker.com/engine/api/v1.39/#operation/ConfigDelete
+	ActionConfigDelete = "config_delete"
+	// ActionConfigUpdate describes https://docs.docker.com/engine/api/v1.39/#operation/ConfigUpdate
+	ActionConfigUpdate = "config_update"
 	// ActionNone indicates no action matched the given method URL combination
 	ActionNone = ""
 )

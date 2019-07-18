@@ -178,6 +178,8 @@ var routes = []route{
 	{pattern: "/configs/.+", method: "DELETE", action: ActionConfigDelete},
 	// https://docs.docker.com/engine/api/v1.39/#operation/ConfigList
 	{pattern: "/configs", method: "GET", action: ActionConfigList},
+	// https://docs.docker.com/engine/api/v1.39/#operation/DistributionInspect
+	{pattern: "/distribution/.+/json", method: "GET", action: ActionDistributionInspect},
 }
 
 // ParseRoute convert a method/url pattern to corresponding docker action

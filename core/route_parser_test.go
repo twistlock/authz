@@ -92,6 +92,7 @@ func TestRouteParser(t *testing.T) {
 		{"GET", "/v1.39/configs/id", ActionConfigInspect},
 		{"DELETE", "/v1.39/configs/id", ActionConfigDelete},
 		{"POST", "/v1.39/configs/id/update", ActionConfigUpdate},
+		{"GET", "/v1.39/distribution/twistlock/authz-broker:latest/json", ActionDistributionInspect},
 	}
 
 	for _, test := range tests {

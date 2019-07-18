@@ -170,6 +170,8 @@ var (
 	ActionConfigDelete = "config_delete"
 	// ActionConfigUpdate describes https://docs.docker.com/engine/api/v1.39/#operation/ConfigUpdate
 	ActionConfigUpdate = "config_update"
+	// ActionDistributionInspect describes https://docs.docker.com/engine/api/v1.39/#operation/DistributionInspect
+	ActionDistributionInspect = "distribution_inspect"
 	// ActionNone indicates no action matched the given method URL combination
 	ActionNone = ""
 )

@@ -1,4 +1,4 @@
-FROM alpine:3.7
+FROM alpine:3.12
 MAINTAINER Liron Levin <liron@twistlock.com>
 
 # Indicates basic authorization is enforced

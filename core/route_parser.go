@@ -16,7 +16,7 @@ var routes = []route{
 	// https://docs.docker.com/reference/api/docker_remote_api_v1.20/#create-a-new-image-from-a-container-s-changes
 	{pattern: "/commit", method: "POST", action: ActionContainerCommit},
 	// https://docs.docker.com/reference/api/docker_remote_api_v1.20/#monitor-docker-s-events
-	{pattern: "/events", method: "POST", action: ActionDockerEvents},
+	{pattern: "/events", method: "GET", action: ActionDockerEvents},
 	// https://docs.docker.com/reference/api/docker_remote_api_v1.20/#show-the-docker-version-information
 	{pattern: "/version", method: "GET", action: ActionDockerVersion},
 	// https://docs.docker.com/reference/api/docker_remote_api_v1.20/#check-auth-configuration
